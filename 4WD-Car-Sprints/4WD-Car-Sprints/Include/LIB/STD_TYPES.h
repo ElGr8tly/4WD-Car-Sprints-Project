@@ -1,7 +1,6 @@
 /*
  * File:   hal_gpio.h
  * Author: El-Greatly
- * https://www.linkedin.com/in/el-greatly-systems-engineer/
  * Created on February 12, 2023
  */
 
@@ -11,14 +10,19 @@
 /* Section : Macro Declarations  */
 #define NULL                ((void*)0)
 
-#define STD_OFF               0
-#define STD_ON                1
+typedef enum {
+    LOGIC_LOW=0,
+    LOGIC_HIGH
+}en_standardLogic;
 
-#define STD_LOW              0
-#define STD_HIGH             1
-
-#define  E_OK              (u8_returnType)1
-#define  E_NOK              (u8_returnType)0
+typedef enum {
+    DIO_OK = 0,
+    DIO_NOK,
+    DIO_WRONG_INPUT,
+    TIMER_OK,
+    TIMER_NOK,
+    TIMER_WRONG_INPUT
+}en_errorStatus;
 
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;
