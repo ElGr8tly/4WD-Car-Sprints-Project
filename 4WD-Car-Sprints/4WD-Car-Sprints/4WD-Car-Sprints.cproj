@@ -120,9 +120,51 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Include\APP\app.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\button\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\led\led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\motor_driver\motor_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\LIB\lib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\dio\dio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\exti\exti.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\gie\gie.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\timer\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Include" />
+    <Folder Include="Include\HAL" />
+    <Folder Include="Include\HAL\led" />
+    <Folder Include="Include\HAL\button" />
+    <Folder Include="Include\HAL\motor_driver" />
+    <Folder Include="Include\MCAL" />
+    <Folder Include="Include\APP" />
+    <Folder Include="Include\LIB" />
+    <Folder Include="Include\MCAL\dio" />
+    <Folder Include="Include\MCAL\exti" />
+    <Folder Include="Include\MCAL\gie" />
+    <Folder Include="Include\MCAL\timer" />
+    <Folder Include="Src" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
