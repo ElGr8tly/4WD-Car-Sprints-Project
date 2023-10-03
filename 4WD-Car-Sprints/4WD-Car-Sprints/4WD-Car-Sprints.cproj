@@ -204,7 +204,6 @@
     <Folder Include="Include\MCAL\dio" />
     <Folder Include="Include\MCAL\exti" />
     <Folder Include="Include\MCAL\gie" />
-    <Folder Include="Include\MCAL\timer" />
     <Folder Include="Src" />
   </ItemGroup>
   <ItemGroup>

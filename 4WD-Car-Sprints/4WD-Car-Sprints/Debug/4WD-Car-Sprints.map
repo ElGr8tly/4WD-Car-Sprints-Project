@@ -34,13 +34,28 @@ Discarded input sections
  .text          0x00000000        0x0 Include/MCAL/dio/dio.o
  .data          0x00000000        0x0 Include/MCAL/dio/dio.o
  .bss           0x00000000        0x0 Include/MCAL/dio/dio.o
- .debug_info    0x00000000       0x56 Include/MCAL/dio/dio.o
- .debug_abbrev  0x00000000       0x1b Include/MCAL/dio/dio.o
+ .text.DIO_pinInit
+                0x00000000        0x2 Include/MCAL/dio/dio.o
+ .text.DIO_setPinDirection
+                0x00000000       0xca Include/MCAL/dio/dio.o
+ .text.DIO_getPinDirection
+                0x00000000        0x2 Include/MCAL/dio/dio.o
+ .text.DIO_setPinStatus
+                0x00000000        0x2 Include/MCAL/dio/dio.o
+ .text.DIO_getPinStatus
+                0x00000000        0x2 Include/MCAL/dio/dio.o
+ .text.DIO_togglePinStatus
+                0x00000000        0x2 Include/MCAL/dio/dio.o
+ .debug_info    0x00000000      0x417 Include/MCAL/dio/dio.o
+ .debug_abbrev  0x00000000      0x137 Include/MCAL/dio/dio.o
+ .debug_loc     0x00000000      0x1f6 Include/MCAL/dio/dio.o
  .debug_aranges
-                0x00000000       0x18 Include/MCAL/dio/dio.o
- .debug_line    0x00000000       0x1a Include/MCAL/dio/dio.o
- .debug_str     0x00000000      0x185 Include/MCAL/dio/dio.o
+                0x00000000       0x48 Include/MCAL/dio/dio.o
+ .debug_ranges  0x00000000       0x38 Include/MCAL/dio/dio.o
+ .debug_line    0x00000000      0x143 Include/MCAL/dio/dio.o
+ .debug_str     0x00000000      0x2fc Include/MCAL/dio/dio.o
  .comment       0x00000000       0x31 Include/MCAL/dio/dio.o
+ .debug_frame   0x00000000       0x74 Include/MCAL/dio/dio.o
  .text          0x00000000        0x0 Include/MCAL/exti/exti.o
  .data          0x00000000        0x0 Include/MCAL/exti/exti.o
  .bss           0x00000000        0x0 Include/MCAL/exti/exti.o
@@ -53,12 +68,6 @@ Discarded input sections
  .debug_line    0x00000000        0x0 Include/MCAL/gie/gie.o
  .debug_str     0x00000000      0x126 Include/MCAL/gie/gie.o
  .comment       0x00000000       0x31 Include/MCAL/gie/gie.o
- .text          0x00000000        0x0 Include/MCAL/timer/timer.o
- .data          0x00000000        0x0 Include/MCAL/timer/timer.o
- .bss           0x00000000        0x0 Include/MCAL/timer/timer.o
- .debug_line    0x00000000        0x0 Include/MCAL/timer/timer.o
- .debug_str     0x00000000      0x12a Include/MCAL/timer/timer.o
- .comment       0x00000000       0x31 Include/MCAL/timer/timer.o
  .text          0x00000000        0x0 Src/main.o
  .data          0x00000000        0x0 Src/main.o
  .bss           0x00000000        0x0 Src/main.o
@@ -101,7 +110,6 @@ LOAD Include/HAL/motor_driver/motor_driver.o
 LOAD Include/MCAL/dio/dio.o
 LOAD Include/MCAL/exti/exti.o
 LOAD Include/MCAL/gie/gie.o
-LOAD Include/MCAL/timer/timer.o
 LOAD Src/main.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a
