@@ -17,8 +17,9 @@
 #define STD_LOW              0
 #define STD_HIGH             1
 
-#define  E_OK              (STD_ReturnType)1
-#define  E_NOK              (STD_ReturnType)0
+#define  E_OK              (u8_returnType)1
+#define  E_NOK              (u8_returnType)0
+
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;
 
@@ -36,7 +37,7 @@ typedef  float                  f32;
 
 typedef  double                 d64;
 
-typedef u8                 STD_ReturnType;
+typedef u8                 u8_returnType;
 
 
 
