@@ -36,25 +36,25 @@
 /* Section: Data Type Declarations */
 
 typedef enum {
-    GPIO_LOW = 0,
-    GPIO_HIGH
+    DIO_LOW = 0,
+    DIO_HIGH
 }en_bitLogic;
 
 typedef enum {
-    GPIO_DIRECTION_OUTPUT = 0,
-    GPIO_DIRECTION_INPUT
+    DIO_DIRECTION_OUTPUT = 0,
+    DIO_DIRECTION_INPUT
 }en_pinDirection;
 
 
 typedef enum {
-    GPIO_PIN0 = 0,
-    GPIO_PIN1,
-    GPIO_PIN2,
-    GPIO_PIN3,
-    GPIO_PIN4,
-    GPIO_PIN5,
-    GPIO_PIN6,
-    GPIO_PIN7
+    DIO_PIN0 = 0,
+    DIO_PIN1,
+    DIO_PIN2,
+    DIO_PIN3,
+    DIO_PIN4,
+    DIO_PIN5,
+    DIOO_PIN6,
+    DIO_PIN7
 }en_pinIndex;
 
 typedef enum {
