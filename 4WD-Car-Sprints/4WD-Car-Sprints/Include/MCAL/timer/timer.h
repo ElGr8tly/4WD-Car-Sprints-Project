@@ -436,7 +436,7 @@ u8_returnType TIMER_getICU(u16 *u8cpy_Value);
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_setCallBack(ut8 u8cpyTimerInterruptNum, void (*ptr)(void));
+u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void));
 /***
  * Reads the value of the input frequency & pulse width from the ICU, returns void
  * INPUT: (u16*) Pointer to store frequency, (u16*) Pointer to store pulse width
