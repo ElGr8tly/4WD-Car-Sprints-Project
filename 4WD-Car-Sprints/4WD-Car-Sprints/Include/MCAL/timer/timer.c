@@ -221,19 +221,39 @@ u8_returnType TIMER_generatePhasePwmSignal(u8 u8_a_timerNumber) {
 	}
 	return u8_a_retFunction;
 }
-void MTIMER_voidSetCallBack(u8 u8cpyTimerInterruptNum, void (*ptr)(void)) {
-	if (u8cpyTimerInterruptNum >= 0 && u8cpyTimerInterruptNum < 8) {
-		v_g_callbackFunc[u8cpyTimerInterruptNum] = ptr;
-		} else {
-		//input error
+u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)) {
+	u8_returnType u8_a_retFunction = E_OK;
+	if ( NULL == v_a_ptr)
+	{
+		u8_a_retFunction = E_NOK;
 	}
+	else
+	{
+		if (u8_a_timerInterruptNum >= 0 && u8_a_timerInterruptNum < 8) 
+		{
+			ptr_func[u8_a_timerInterruptNum] = v_a_ptr;
+		} 
+		else {
+			u8_a_retFunction = E_NOK;
+		}
+	}
+	return u8_a_retFunction ;
 }
 
-void MTIMER_voidSetICUEdge(u8 u8cpyIC_EDGE) {
-	//Clr_Bit(TIMSK, TICIE1);
-	TCCR1B = (TCCR1B & 0x9F) | (u8cpyIC_EDGE << ICES1);
-	Set_Bit(TIFR, ICF1);
-	//Set_Bit(TIMSK, TICIE1);
+u8_returnType TIMER_setICUEdge(u8 u8_a_icEDGE) {
+	
+	u8_returnType u8_a_retFunction = E_OK;
+	if (u8_a_icEDGE != TIMER_1_IC_FALLING && u8_a_icEDGE != TIMER_1_IC_RISING)
+	{
+		u8_a_retFunction = E_NOK;
+	}
+	else
+	{
+		TCCR1B = (TCCR1B & 0x9F) | (u8_a_icEDGE << ICES1);
+		SET_BIT(TIFR, ICF1);
+	}
+	return u8_a_retFunction;
+	
 }
 u8_returnType TIMER_getICU(u16 *u16_a_value) {
 	u8_returnType u8_a_retFunction = E_OK;
@@ -244,48 +264,57 @@ u8_returnType TIMER_getICU(u16 *u16_a_value) {
 	}
 	return u8_a_retFunction;
 }
-void MTIMER_voidMeasureSignal(u32 *u16cpy_frequency, u32 *u16cpy_timeOn) {
+u8_returnType TIMER_measureSignal(u32 *u16_a_frequency, u32 *u16_a_timeOn) {
+	u8_returnType u8_a_retFunction = E_OK;
 	u16 Ticks[3] = { 0 };
 	u16 Period = 0;
 	u16 Ton = 0;
-	Set_Bit(TIFR, ICF1);
-	MTIMER_voidStart(TIMER_TM1);
-	while (!(TIFR & (1 << ICF1)))
-	;
-	MTIMER_voidGetICU(&Ticks[0]);
-	MTIMER_voidSetICUEdge(TIMER_1_IC_RISING);
-	while (!(TIFR & (1 << ICF1)))
-	;
-	MTIMER_voidGetICU(&Ticks[1]);
-	MTIMER_voidSetICUEdge(TIMER_1_IC_FALLING);
-	while (!(TIFR & (1 << ICF1)))
-	;
-	MTIMER_voidGetICU(&Ticks[2]);
-	if (Ticks[2] > Ticks[1]) {
-		Period = Ticks[2] - Ticks[0];
-		} else if (Ticks[2] < Ticks[1]) {
-		Period = (0xffff - Ticks[0]) + Ticks[2];
+	if (NULL == u16_a_frequency || NULL == u16_a_timeOn )
+	{
+		u8_a_retFunction = E_NOK;
 	}
-	if (Ticks[2] > Ticks[1]) {
-		Ton = Ticks[2] - Ticks[1];
-		} else if (Ticks[2] < Ticks[1]) {
-		Ton = (0xffff - Ticks[1]) + Ticks[2];
+	else
+	{
+			SET_BIT(TIFR, ICF1);
+			TIMER_start(TIMER_TM1);
+			while (!(TIFR & (1 << ICF1)))
+			;
+			TIMER_getICU(&Ticks[0]);
+			TIMER_setICUEdge(TIMER_1_IC_RISING);
+			while (!(TIFR & (1 << ICF1)))
+			;
+			TIMER_getICU(&Ticks[1]);
+			TIMER_setICUEdge(TIMER_1_IC_FALLING);
+			while (!(TIFR & (1 << ICF1)))
+			;
+			TIMER_getICU(&Ticks[2]);
+			if (Ticks[2] > Ticks[1]) {
+				Period = Ticks[2] - Ticks[0];
+				} else if (Ticks[2] < Ticks[1]) {
+				Period = (0xffff - Ticks[0]) + Ticks[2];
+			}
+			if (Ticks[2] > Ticks[1]) {
+				Ton = Ticks[2] - Ticks[1];
+				} else if (Ticks[2] < Ticks[1]) {
+				Ton = (0xffff - Ticks[1]) + Ticks[2];
+			}
+			TIMER_stop(TIMER_TM1);
+			u32 prescaler = 0;
+			#if TIMER_1_CLK == PRE_8
+			prescaler = 8;
+			#elif TIMER_1_CLK == NO_PRE
+			prescaler = 1;
+			#elif TIMER_1_CLK == PRE_64PRE_8
+			prescaler = 64;
+			#elif TIMER_1_CLK == PRE_256
+			prescaler = 256;
+			#elif TIMER_1_CLK == PRE_1024
+			prescaler = 1024;
+			#endif
+			*u16_a_frequency =  (u16) ((d64)((d64)F_CPU / (d64)prescaler)   / (d64) Period);
+			*u16_a_timeOn = (u16) ( ( (d64)prescaler / (d64)((d64)F_CPU / 1000000.0) ) * Ton);
 	}
-	MTIMER_voidStop(TIMER_TM1);
-	u32 prescaler = 0;
-	#if TIMER_1_CLK == PRE_8
-	prescaler = 8;
-	#elif TIMER_1_CLK == NO_PRE
-	prescaler = 1;
-	#elif TIMER_1_CLK == PRE_64PRE_8
-	prescaler = 64;
-	#elif TIMER_1_CLK == PRE_256
-	prescaler = 256;
-	#elif TIMER_1_CLK == PRE_1024
-	prescaler = 1024;
-	#endif
-	*u16cpy_frequency =  (u16) ((f64)((f64)F_CPU / (f64)prescaler)   / (f64) Period);
-	*u16cpy_timeOn = (u16) ( ( (f64)prescaler / (f64)((f64)F_CPU / 1000000.0) ) * Ton);
+	return u8_a_retFunction;
 }
 void __vector_4(void) {
 	if (v_g_callbackFunc[TIMER2_COMP] != NULL)
