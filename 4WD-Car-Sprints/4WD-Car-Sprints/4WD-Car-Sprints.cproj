@@ -150,9 +150,6 @@
     <Compile Include="Include\MCAL\gie\gie.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\MCAL\timer\timer.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Src\main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -169,7 +166,6 @@
     <Folder Include="Include\MCAL\dio" />
     <Folder Include="Include\MCAL\exti" />
     <Folder Include="Include\MCAL\gie" />
-    <Folder Include="Include\MCAL\timer" />
     <Folder Include="Src" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
