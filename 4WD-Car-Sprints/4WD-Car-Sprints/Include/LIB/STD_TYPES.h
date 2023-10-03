@@ -18,7 +18,7 @@
 #define STD_HIGH             1
 
 #define  E_OK              (u8_returnType)1
-#define  E_NOK              (u8_returnType)0
+#define  E_NOK             (u8_returnType)0
 
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;
