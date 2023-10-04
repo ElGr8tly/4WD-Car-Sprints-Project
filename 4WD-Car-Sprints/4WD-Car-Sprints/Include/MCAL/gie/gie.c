@@ -5,7 +5,7 @@
  *  Author: melgreatly
  */ 
 /***************************** includes section *************************************************/
-#include "../4WD-Car-Sprints/Include/LIB/STD_TYPES.h"
+#include "../../LIB/STD_TYPES.h"
 #include "gie.h"
 
 en_gieErrorStatus GIE_enableGeneralInterrupt(void)

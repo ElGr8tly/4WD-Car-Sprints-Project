@@ -11,7 +11,10 @@ en_systemStatus en_g_carStatus = SYSTEM_OFF;
 u8 u8_g_sequenceNumber = 0;
 
 u8 u8_g_halfSecondStop = 0;
-st_carMode st_g_systemSequence[SYSTEM_SEQ] = {
+
+
+
+st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 	{
 		.ptr_g_Function = APP_longestSide,
 		.period = LONGEST_SIDE_PERIOD
@@ -29,9 +32,23 @@ st_carMode st_g_systemSequence[SYSTEM_SEQ] = {
 		.period = ROTATE_PERIOD
 	}};
 
+
+
+
+st_pinConfig st_g_pwmSignalPin = {PORTA_INDEX,DIO_PIN4,DIO_DIRECTION_OUTPUT,DIO_LOW,0};
+
+st_button st_g_startButton = {PORTD_INDEX,DIO_PIN1};
+st_button st_g_stopButton = {PORTD_INDEX,DIO_PIN2};
+
+st_leds	  st_g_longSideLed = {PORTB_INDEX,DIO_PIN0};
+st_leds	  st_g_shortSideLed = {PORTB_INDEX,DIO_PIN1};
+st_leds	  st_g_stopLed = {PORTB_INDEX,DIO_PIN2};
+st_leds	  st_g_rotateLed = {PORTB_INDEX,DIO_PIN3};
+	
+
 												
-interrupt_INTx_t st_g_start_button;
-interrupt_INTx_t st_g_stop_button;
+interrupt_INTx_t st_g_startInterrupt;
+interrupt_INTx_t st_g_stopInterrupt;
 /*************************************************************************************/
 void APP_overflowRoutine()
 {
@@ -42,7 +59,7 @@ void APP_overflowRoutine()
 		if(st_g_systemSequence[u8_g_sequenceNumber].period == i8_gs_overFlowCounter)
 		{
 			i8_gs_overFlowCounter=-1;
-			st_g_systemSequence = (u8_g_sequenceNumber + 1) % SEQUENCE_MAX_NUMBER;
+			u8_g_sequenceNumber = (u8_g_sequenceNumber + 1) % SEQUENCE_MAX_NUMBER;
 			u8_g_halfSecondStop = 1;
 		}
 		else
@@ -57,42 +74,78 @@ void APP_overflowRoutine()
 	}
 }
 /*************************************************************************************/
-en_appErrorStatus APP_pwmRoutine();
+void APP_pwmRoutine()
+{
+	DIO_togglePinStatus(&st_g_pwmSignalPin);
+	TIMER_preload(u8_g_pwmDutyCycle,TIMER_TM0);
+}
 /*************************************************************************************/	
+//set pin A0..3 for motor directions 
+//set pin D1 D2 for external interrupts input signal 
+//set pin A4 for pwm signal output
+//set pin B0..3 for leds
+
+/************************************************/
+
+
+
+
+	
+
+/**********************************************/
 en_appErrorStatus APP_init()
 {
-	en_appErrorStatus en_appErrorStatus = APP_OK;
-	st_g_start_button =
-	{
-		.en_a_mode = INTERRUPT_FALLING_EDGE,
-		.en_a_source = INTERRUPT_EXTERNAL_INT1,
-		.EXT_InterruptHandler = APP_systemStart
-	};
-	st_g_stop_button =
-	{
-		.en_a_mode = INTERRUPT_FALLING_EDGE,
-		.en_a_source = INTERRUPT_EXTERNAL_INT0,
-		.EXT_InterruptHandler = APP_systemStop
-	};
-	en_appErrorStatus |= EXTI_interruptInit(&st_g_start_button);
-	en_appErrorStatus |= EXTI_interruptInit(&st_g_stop_button);
+	en_appErrorStatus en_appErrorStatus = APP_OK;	
+	st_g_startInterrupt.en_a_mode = INTERRUPT_FALLING_EDGE;
+	st_g_startInterrupt.en_a_source = INTERRUPT_EXTERNAL_INT1;
+	st_g_startInterrupt.EXT_InterruptHandler = APP_systemStart;
+		
+	en_appErrorStatus |= DIO_setPinDirection(&st_g_pwmSignalPin);
 	
-	return = en_appErrorStatus ;
+	en_appErrorStatus |= BUTTON_init(&st_g_startButton);
+	en_appErrorStatus |= BUTTON_init(&st_g_stopButton);
+	
+	en_appErrorStatus |= LED_init(&st_g_longSideLed);
+	en_appErrorStatus |= LED_init(&st_g_shortSideLed);
+	en_appErrorStatus |= LED_init(&st_g_rotateLed);
+	en_appErrorStatus |= LED_init(&st_g_stopLed);
+	
+	st_g_stopInterrupt.en_a_mode = INTERRUPT_FALLING_EDGE;
+	st_g_stopInterrupt.en_a_source = INTERRUPT_EXTERNAL_INT0;
+	st_g_stopInterrupt.EXT_InterruptHandler = APP_systemStop;
+
+	en_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
+	en_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
+	
+	en_appErrorStatus |= TIMER_init();
+	en_appErrorStatus |= TIMER_setCallBack(TIMER0_OVF,APP_pwmRoutine);
+	en_appErrorStatus |= TIMER_setCallBack(TIMER1_OVF,APP_overflowRoutine);
+	en_appErrorStatus |= TIMER_preload(231,TIMER_TM0);
+	
+	en_appErrorStatus |= GIE_enableGeneralInterrupt();
+	en_appErrorStatus |= MOTOR_DriverInitialize();
+	
+	return  en_appErrorStatus ;
 }
 void APP_systemStart()
 {
 	/*write function*/
+	TIMER_start(TIMER_TM0);
+	TIMER_start(TIMER_TM1);
 	en_g_carStatus = START_PRESSED;
 	
 }
-en_appErrorStatus APP_longestSide();
+en_appErrorStatus APP_longestSide()
+{
+	
+}
 en_appErrorStatus APP_shortestSide();
 en_appErrorStatus APP_rotate();
 en_appErrorStatus APP_stop()
 {
 	
 }
-en_appErrorStatus APP_systemStop()
+void APP_systemStop()
 {
 	/*write function*/
 	en_g_carStatus = SYSTEM_OFF;
