@@ -120,19 +120,28 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="dio.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Include\APP\app.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\APP\app.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\HAL\button\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\button\button.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\led\led.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Include\HAL\led\led.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\HAL\motor_driver\motor_driver.c">
+    <Compile Include="Include\HAL\motor_driver\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\motor_driver\motor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\LIB\BIT_MATH.h">
@@ -153,13 +162,19 @@
     <Compile Include="Include\MCAL\exti\exti.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\MCAL\gie\gie.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\gie\gie.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Include\MCAL\timer\timer.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\MCAL\timer\timer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Src\main.c">
+    <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

@@ -170,7 +170,7 @@ void __vector_11 (void) __attribute__ ((signal, used));
                PWM_PHASE_CORRECT   |OCR0 |    Immediate   |      MAX
                FAST_PWM            |0xFF |     BOTTOM     |      MAX
  */
-#define TIMER_0_MODE         FAST_PWM
+#define TIMER_0_MODE         NORMAL
 ///////////////CHOOSE NORMAL/CTC MODE CONFIG///////////////
 /*options in Compare Output Mode, non-PWM Mode
 OC0_OFF: Normal port operation, OC0 disconnected.
@@ -206,7 +206,7 @@ EXT_RISING  : External clock source on T0 pin. Clock on rising edge.
 #define TIMER_0_CLK           PRE_8
 ///////////////ENABLE TIMER0 INTERRUPTS///////////////
 #define TIMER_0_OC_INTERRUPT  DISABLE
-#define TIMER_0_OVF_INTERRUPT DISABLE
+#define TIMER_0_OVF_INTERRUPT ENABLE
 /***************************************/
 /*************TIMER1 CONFIG*************/
 /***************************************/
@@ -276,12 +276,12 @@ PRE_1024    : F_CPU / 1024 (From prescaler)
 EXT_FALLING : External clock source on T1 pin. Clock on falling edge
 EXT_RISING  : External clock source on T1 pin. Clock on rising edge.
 */
-#define TIMER_1_CLK          NO_PRE
+#define TIMER_1_CLK          PRE_64
 ///////////////ENABLE TIMER1 INTERRUPTS///////////////
 #define TIMER_1_IC_INTERRUPT  DISABLE
 #define TIMER_1_OCA_INTERRUPT DISABLE
 #define TIMER_1_OCB_INTERRUPT DISABLE
-#define TIMER_1_OVF_INTERRUPT DISABLE
+#define TIMER_1_OVF_INTERRUPT ENABLE
 /***************************************/
 /*************TIMER2 CONFIG*************/
 /***************************************/

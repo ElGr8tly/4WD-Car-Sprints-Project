@@ -24,6 +24,7 @@
 en_dioErrorStatus DIO_pinInitialize(const st_pinConfig* st_a_pinConfig)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	
 	if (st_a_pinConfig != NULL)
 	{
 		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)

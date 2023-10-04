@@ -64,13 +64,15 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../dio.c \
 ../Include/APP/app.c \
-../Include/HAL/motor_driver/motor_driver.c \
+../Include/HAL/button/button.c \
+../Include/HAL/led/led.c \
+../Include/HAL/motor_driver/motor.c \
 ../Include/MCAL/dio/dio.c \
 ../Include/MCAL/exti/exti.c \
+../Include/MCAL/gie/gie.c \
 ../Include/MCAL/timer/timer.c \
-../Src/main.c
+../main.c
 
 
 PREPROCESSING_SRCS += 
@@ -80,40 +82,48 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-dio.o \
 Include/APP/app.o \
-Include/HAL/motor_driver/motor_driver.o \
+Include/HAL/button/button.o \
+Include/HAL/led/led.o \
+Include/HAL/motor_driver/motor.o \
 Include/MCAL/dio/dio.o \
 Include/MCAL/exti/exti.o \
+Include/MCAL/gie/gie.o \
 Include/MCAL/timer/timer.o \
-Src/main.o
+main.o
 
 OBJS_AS_ARGS +=  \
-dio.o \
 Include/APP/app.o \
-Include/HAL/motor_driver/motor_driver.o \
+Include/HAL/button/button.o \
+Include/HAL/led/led.o \
+Include/HAL/motor_driver/motor.o \
 Include/MCAL/dio/dio.o \
 Include/MCAL/exti/exti.o \
+Include/MCAL/gie/gie.o \
 Include/MCAL/timer/timer.o \
-Src/main.o
+main.o
 
 C_DEPS +=  \
-dio.d \
 Include/APP/app.d \
-Include/HAL/motor_driver/motor_driver.d \
+Include/HAL/button/button.d \
+Include/HAL/led/led.d \
+Include/HAL/motor_driver/motor.d \
 Include/MCAL/dio/dio.d \
 Include/MCAL/exti/exti.d \
+Include/MCAL/gie/gie.d \
 Include/MCAL/timer/timer.d \
-Src/main.d
+main.d
 
 C_DEPS_AS_ARGS +=  \
-dio.d \
 Include/APP/app.d \
-Include/HAL/motor_driver/motor_driver.d \
+Include/HAL/button/button.d \
+Include/HAL/led/led.d \
+Include/HAL/motor_driver/motor.d \
 Include/MCAL/dio/dio.d \
 Include/MCAL/exti/exti.d \
+Include/MCAL/gie/gie.d \
 Include/MCAL/timer/timer.d \
-Src/main.d
+main.d
 
 OUTPUT_FILE_PATH +=4WD-Car-Sprints.elf
 
@@ -129,13 +139,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-./dio.o: .././dio.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 Include/APP/app.o: ../Include/APP/app.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -143,7 +146,21 @@ Include/APP/app.o: ../Include/APP/app.c
 	@echo Finished building: $<
 	
 
-Include/HAL/motor_driver/motor_driver.o: ../Include/HAL/motor_driver/motor_driver.c
+Include/HAL/button/button.o: ../Include/HAL/button/button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Include/HAL/led/led.o: ../Include/HAL/led/led.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+Include/HAL/motor_driver/motor.o: ../Include/HAL/motor_driver/motor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -164,6 +181,13 @@ Include/MCAL/exti/exti.o: ../Include/MCAL/exti/exti.c
 	@echo Finished building: $<
 	
 
+Include/MCAL/gie/gie.o: ../Include/MCAL/gie/gie.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 Include/MCAL/timer/timer.o: ../Include/MCAL/timer/timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -171,7 +195,7 @@ Include/MCAL/timer/timer.o: ../Include/MCAL/timer/timer.c
 	@echo Finished building: $<
 	
 
-Src/main.o: ../Src/main.c
+./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

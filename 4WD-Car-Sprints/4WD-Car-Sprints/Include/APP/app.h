@@ -17,7 +17,7 @@
 #include "../MCAL/timer/timer.h"
 #include "../HAL/button/button.h"
 #include "../HAL/led/led.h"
-#include "../HAL/motor.h"
+#include "../HAL/motor_driver/motor.h"
 
 /**********************************************/
 #define SHORTEST_SIDE_PERIOD	4 /*  2 sec */
@@ -25,6 +25,7 @@
 #define ROTATE_PERIOD			2 /*  1 sec */
 
 #define SEQUENCE_MAX_NUMBER		4 /*  Array size */
+
 
 typedef enum {
 	APP_OK = 0,
@@ -40,18 +41,18 @@ typedef struct
 
 typedef enum 
 {
-	SYSTEM_ON = 0;
-	SYSTEM_OFF;
-	START_PRESSED;
+	SYSTEM_ON = 0,
+	SYSTEM_OFF,
+	START_PRESSED,
 }en_systemStatus;
 
-en_appErrorStatus APP_systemStart();
+void APP_systemStart();
 en_appErrorStatus APP_longestSide();
 en_appErrorStatus APP_shortestSide();
 en_appErrorStatus APP_rotate();
 en_appErrorStatus APP_stop();
-en_appErrorStatus APP_systemStop();
-en_appErrorStatus APP_overflowRoutine();
-en_appErrorStatus APP_pwmRoutine();
+void APP_systemStop();
+void APP_overflowRoutine();
+void APP_pwmRoutine();
 
 #endif /* APP_H_ */
