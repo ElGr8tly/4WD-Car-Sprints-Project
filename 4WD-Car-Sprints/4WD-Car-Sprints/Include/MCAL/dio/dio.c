@@ -538,4 +538,45 @@ en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfi
 
 }
 /******************************************************************************/
+en_dioErrorStatus DIO_lockPin(st_pinConfig* st_a_pinConfig)
+{
+	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	if (st_a_pinConfig != NULL)
+	{
+		if (st_a_pinConfig->u8_g_reserved == 0)
+		{
+			st_a_pinConfig->u8_g_reserved = 1;
+		}
+		else
+		{
+			en_a_retFunction = DIO_NOK;
+		}
 
+	}
+	else
+	{
+		en_a_retFunction = DIO_WRONG_INPUT;
+	}
+	return en_a_retFunction;
+}
+en_dioErrorStatus DIO_unlockPin(st_pinConfig* st_a_pinConfig)
+{
+	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	if (st_a_pinConfig != NULL)
+	{
+		if (st_a_pinConfig->u8_g_reserved == 1)
+		{
+			st_a_pinConfig->u8_g_reserved = 0;
+		}
+		else
+		{
+			en_a_retFunction = DIO_NOK;
+		}
+
+	}
+	else
+	{
+		en_a_retFunction = DIO_WRONG_INPUT;
+	}
+	return en_a_retFunction;
+}
