@@ -89,10 +89,14 @@ typedef struct{
 	interrupt_INTx_src en_a_source;
 }interrupt_INTx_t;
 
+typedef enum {
+	EXTI_OK = 0,
+	EXTI_NOK,
+}en_extiErrorStatus;
 
-u8_returnType EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj);
+en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj);
 
 
-u8_returnType EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj);
+en_extiErrorStatus EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj);
 
 #endif /* EXTI_H_ */

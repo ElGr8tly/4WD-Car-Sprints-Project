@@ -11,12 +11,12 @@
 static void (*v_gs_ptrfuncInt0)(void) = NULL ;
 static void (*v_gs_ptrfuncInt1)(void) = NULL ;
 
-u8_returnType EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
+en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 {
-	u8_returnType u8_a_retFunction = E_OK;
+	en_extiErrorStatus u8_a_retFunction = EXTI_OK;
 	if (st_a_intObj == NULL)
 	{
-		u8_a_retFunction = E_NOK;
+		u8_a_retFunction = EXTI_NOK;
 	}
 	else
 	{
@@ -41,7 +41,7 @@ u8_returnType EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			}
 			else
 			{
-				u8_a_retFunction = E_NOK;
+				u8_a_retFunction = EXTI_WRONG_DATA;
 			}
 			v_gs_ptrfuncInt0 = st_a_intObj->EXT_InterruptHandler ; 
 			EXT_INT0_InterruptEnable();
@@ -67,14 +67,14 @@ u8_returnType EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			}
 			else
 			{
-				u8_a_retFunction = E_NOK;
+				u8_a_retFunction = EXTI_WRONG_DATA;
 			}
 			v_gs_ptrfuncInt1 = st_a_intObj->EXT_InterruptHandler ;
 			EXT_INT1_InterruptEnable();
 		}
 		else
 		{
-			u8_a_retFunction = E_NOK;
+			u8_a_retFunction = EXTI_WRONG_DATA;
 		}
 	}
 	return u8_a_retFunction;
@@ -82,12 +82,12 @@ u8_returnType EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 }
 
 
-u8_returnType EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj)
+en_extiErrorStatus EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj)
 {
-	u8_returnType u8_a_retFunction = E_OK;
+	en_extiErrorStatus u8_a_retFunction = EXTI_OK;
 	if (st_a_intObj == NULL)
 	{
-		u8_a_retFunction = E_NOK;
+		u8_a_retFunction = EXTI_NOK;
 	}
 	else
 	{
@@ -103,7 +103,7 @@ u8_returnType EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj)
 		}
 		else
 		{
-			u8_a_retFunction = E_NOK;
+			u8_a_retFunction = EXTI_WRONG_DATA;
 		}
 	}
 	return u8_a_retFunction;
