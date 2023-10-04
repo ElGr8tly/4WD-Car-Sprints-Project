@@ -6,7 +6,8 @@
  */ 
 
 /***************************** includes section *************************************************/
-#include "../4WD-Car-Sprints/Include/LIB/STD_TYPES.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../gie/gie.h"
 #include "exti.h"
 
 static void (*v_gs_ptrfuncInt0)(void) = NULL ;
@@ -46,8 +47,9 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			}
 			v_gs_ptrfuncInt0 = st_a_intObj->EXT_InterruptHandler ; 
 			EXT_INT0_InterruptEnable();
+			GIE_enableGeneralInterrupt();
 		}
-		else if((st_a_intObj->en_a_source == INTERRUPT_EXTERNAL_INT1)
+		else if(st_a_intObj->en_a_source == INTERRUPT_EXTERNAL_INT1)
 		{
 			
 			if (st_a_intObj->en_a_mode == INTERRUPT_LOW_LEVEL)
@@ -72,6 +74,7 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			}
 			v_gs_ptrfuncInt1 = st_a_intObj->EXT_InterruptHandler ;
 			EXT_INT1_InterruptEnable();
+			GIE_enableGeneralInterrupt();
 		}
 		else
 		{
@@ -97,7 +100,7 @@ en_extiErrorStatus EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj)
 			
 			EXT_INT0_InterruptDisable();
 		}
-		else if((st_a_intObj->en_a_source == INTERRUPT_EXTERNAL_INT1)
+		else if(st_a_intObj->en_a_source == INTERRUPT_EXTERNAL_INT1)
 		{
 			
 			EXT_INT1_InterruptDisable();
