@@ -15,14 +15,7 @@ typedef enum {
     LOGIC_HIGH
 }en_standardLogic;
 
-typedef enum {
-    DIO_OK = 0,
-    DIO_NOK,
-    DIO_WRONG_INPUT,
-    TIMER_OK,
-    TIMER_NOK,
-    TIMER_WRONG_INPUT
-}en_errorStatus;
+
 
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;

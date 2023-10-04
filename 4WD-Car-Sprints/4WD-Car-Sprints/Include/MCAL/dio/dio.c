@@ -6,36 +6,35 @@
  */ 
 #include "../../LIB/STD_TYPES.h"
 #include "dio.h"
-#define CATCH_RESERVED_BIT( _pin_ )       ((_pin_) >> 7)
 
-/* Section: Function Declarations */
+/* Section: Function Definitions */
 
 
-u8_returnType DIO_pinInit(const st_pinConfig *st_a_pinConfig)
+en_dioErrorStatus DIO_pinInit(const st_pinConfig *st_a_pinConfig)
 {
-	u8_returnType u8_a_retFunction = DIO_OK;
+	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (CATCH_RESERVED_BIT(st_a_pinConfig) == 0 )
+		if (st_a_pinConfig->u8_g_reserved == 0 )
 		{
-			u8_a_retFunction &= DIO_setPinDirection(st_a_pinConfig);
-			u8_a_retFunction &= DIO_setPinStatus(st_a_pinConfig, st_a_pinConfig->logic);
+			en_a_retFunction &= DIO_setPinDirection(st_a_pinConfig);
+			en_a_retFunction &= DIO_setPinStatus(st_a_pinConfig, st_a_pinConfig->logic);
 		}
-		else
+		else  /* Wrong data casted to pinConfig struct */
 		{
-			u8_a_retFunction = DIO_WRONG_INPUT;
+			en_a_retFunction = DIO_WRONG_INPUT;
 		}
 
 	}
 	else
 	{
-		u8_a_retFunction = DIO_WRONG_INPUT;
+		en_a_retFunction = DIO_WRONG_INPUT;
 	}
 
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType DIO_setPinDirection(const st_pinConfig *st_a_pinConfig){}//mansour
-u8_returnType DIO_getPinDirection(const st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus){}//greatly
-u8_returnType DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic){}//mansour
-u8_returnType DIO_getPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic *en_a_bitLogic){}//greatly
-u8_returnType DIO_togglePinStatus( st_pinConfig *st_a_pinConfig);//mansour
+en_dioErrorStatus DIO_setPinDirection(const st_pinConfig *st_a_pinConfig){}//mansour
+en_dioErrorStatus DIO_getPinDirection(const st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus){}//greatly
+en_dioErrorStatus DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic){}//mansour
+en_dioErrorStatus DIO_getPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic *en_a_bitLogic){}//greatly
+en_dioErrorStatus DIO_togglePinStatus( st_pinConfig *st_a_pinConfig);//mansour
