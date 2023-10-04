@@ -40,6 +40,11 @@ typedef enum {
 }en_bitLogic;
 
 typedef enum {
+    DIO_UNLOCK = 0,
+    DIO_LOCK
+}en_bitLock;
+
+typedef enum {
     DIO_DIRECTION_OUTPUT = 0,
     DIO_DIRECTION_INPUT
 }en_pinDirection;

@@ -10,6 +10,7 @@
 // error type
 typedef enum en_ledError{
 	LED_OK,
+	LED_WRONG_INPUT,
     LED_OPERATION_FAILED
 }en_ledError;
 //struct to store led attributes

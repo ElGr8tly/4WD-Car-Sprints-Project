@@ -92,7 +92,6 @@ en_buttonError BUTTON_init(st_button *st_a_butt){
 (A) BUTTON_OK          : executed successfully
 (B) BUTTON_WRONG_INPUT : wrong input in button struct
 (B) BUTTON_OP_FAILED   : DIO couldn't get the pin value
-
 **************************************************************************************************************************
 **************************************************************************************************************************
 */
