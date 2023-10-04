@@ -81,7 +81,7 @@ typedef struct {
 /* Section: Function Declarations */
 en_dioErrorStatus DIO_pinInitialize(const st_pinConfig *st_a_pinConfig);
 en_dioErrorStatus DIO_setPinDirection(const st_pinConfig *st_a_pinConfig);
-en_dioErrorStatus DIO_getPinDirection(const st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus);
+en_dioErrorStatus DIO_getPinDirection( st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus);
 en_dioErrorStatus DIO_setPinPullupResistor(const st_pinConfig* st_a_pinConfig);
 en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfig);
 en_dioErrorStatus DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic);
