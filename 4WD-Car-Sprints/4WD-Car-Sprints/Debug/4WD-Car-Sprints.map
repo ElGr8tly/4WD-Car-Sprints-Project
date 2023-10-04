@@ -39,7 +39,7 @@ Discarded input sections
  .data          0x00000000        0x0 dio.o
  .bss           0x00000000        0x0 dio.o
  .debug_line    0x00000000        0x0 dio.o
- .debug_str     0x00000000      0x116 dio.o
+ .debug_str     0x00000000      0x117 dio.o
  .comment       0x00000000       0x31 dio.o
  .text          0x00000000        0x0 Include/APP/app.o
  .data          0x00000000        0x0 Include/APP/app.o
@@ -47,44 +47,6 @@ Discarded input sections
  .debug_line    0x00000000        0x0 Include/APP/app.o
  .debug_str     0x00000000      0x121 Include/APP/app.o
  .comment       0x00000000       0x31 Include/APP/app.o
- .text          0x00000000        0x0 Include/HAL/button/button.o
- .data          0x00000000        0x0 Include/HAL/button/button.o
- .bss           0x00000000        0x0 Include/HAL/button/button.o
- .text.BUTTON_init
-                0x00000000       0x3a Include/HAL/button/button.o
- .text.BUTTON_getValue
-                0x00000000       0x3a Include/HAL/button/button.o
- .text.BUTTON_connectIPU
-                0x00000000       0x3c Include/HAL/button/button.o
- .debug_info    0x00000000      0x2db Include/HAL/button/button.o
- .debug_abbrev  0x00000000      0x143 Include/HAL/button/button.o
- .debug_loc     0x00000000      0x200 Include/HAL/button/button.o
- .debug_aranges
-                0x00000000       0x30 Include/HAL/button/button.o
- .debug_ranges  0x00000000       0x20 Include/HAL/button/button.o
- .debug_line    0x00000000      0x10b Include/HAL/button/button.o
- .debug_str     0x00000000      0x2ca Include/HAL/button/button.o
- .comment       0x00000000       0x31 Include/HAL/button/button.o
- .debug_frame   0x00000000       0x74 Include/HAL/button/button.o
- .text          0x00000000        0x0 Include/HAL/led/led.o
- .data          0x00000000        0x0 Include/HAL/led/led.o
- .bss           0x00000000        0x0 Include/HAL/led/led.o
- .text.LED_init
-                0x00000000       0x4e Include/HAL/led/led.o
- .text.LED_on   0x00000000       0x52 Include/HAL/led/led.o
- .text.LED_off  0x00000000       0x50 Include/HAL/led/led.o
- .text.LED_toggle
-                0x00000000       0x62 Include/HAL/led/led.o
- .debug_info    0x00000000      0x322 Include/HAL/led/led.o
- .debug_abbrev  0x00000000      0x143 Include/HAL/led/led.o
- .debug_loc     0x00000000      0x2e0 Include/HAL/led/led.o
- .debug_aranges
-                0x00000000       0x38 Include/HAL/led/led.o
- .debug_ranges  0x00000000       0x28 Include/HAL/led/led.o
- .debug_line    0x00000000      0x154 Include/HAL/led/led.o
- .debug_str     0x00000000      0x29d Include/HAL/led/led.o
- .comment       0x00000000       0x31 Include/HAL/led/led.o
- .debug_frame   0x00000000       0xc4 Include/HAL/led/led.o
  .text          0x00000000        0x0 Include/HAL/motor_driver/motor_driver.o
  .data          0x00000000        0x0 Include/HAL/motor_driver/motor_driver.o
  .bss           0x00000000        0x0 Include/HAL/motor_driver/motor_driver.o
@@ -94,28 +56,32 @@ Discarded input sections
  .text          0x00000000        0x0 Include/MCAL/dio/dio.o
  .data          0x00000000        0x0 Include/MCAL/dio/dio.o
  .bss           0x00000000        0x0 Include/MCAL/dio/dio.o
- .text.DIO_pinInit
-                0x00000000        0x2 Include/MCAL/dio/dio.o
  .text.DIO_setPinDirection
-                0x00000000       0xca Include/MCAL/dio/dio.o
+                0x00000000       0xe8 Include/MCAL/dio/dio.o
  .text.DIO_getPinDirection
-                0x00000000        0x2 Include/MCAL/dio/dio.o
+                0x00000000       0xa8 Include/MCAL/dio/dio.o
  .text.DIO_setPinStatus
-                0x00000000        0x2 Include/MCAL/dio/dio.o
+                0x00000000      0x19a Include/MCAL/dio/dio.o
+ .text.DIO_pinInitialize
+                0x00000000       0x34 Include/MCAL/dio/dio.o
  .text.DIO_getPinStatus
-                0x00000000        0x2 Include/MCAL/dio/dio.o
+                0x00000000       0xa8 Include/MCAL/dio/dio.o
  .text.DIO_togglePinStatus
-                0x00000000        0x2 Include/MCAL/dio/dio.o
- .debug_info    0x00000000      0x417 Include/MCAL/dio/dio.o
- .debug_abbrev  0x00000000      0x137 Include/MCAL/dio/dio.o
- .debug_loc     0x00000000      0x1f6 Include/MCAL/dio/dio.o
+                0x00000000       0x50 Include/MCAL/dio/dio.o
+ .text.DIO_setPinPullupResistor
+                0x00000000       0xf4 Include/MCAL/dio/dio.o
+ .text.DIO_disablePinPullupResistor
+                0x00000000       0xf4 Include/MCAL/dio/dio.o
+ .debug_info    0x00000000      0xa79 Include/MCAL/dio/dio.o
+ .debug_abbrev  0x00000000      0x1ac Include/MCAL/dio/dio.o
+ .debug_loc     0x00000000      0x7f9 Include/MCAL/dio/dio.o
  .debug_aranges
-                0x00000000       0x48 Include/MCAL/dio/dio.o
- .debug_ranges  0x00000000       0x38 Include/MCAL/dio/dio.o
- .debug_line    0x00000000      0x143 Include/MCAL/dio/dio.o
- .debug_str     0x00000000      0x2fc Include/MCAL/dio/dio.o
+                0x00000000       0x58 Include/MCAL/dio/dio.o
+ .debug_ranges  0x00000000      0x1c8 Include/MCAL/dio/dio.o
+ .debug_line    0x00000000      0x4bb Include/MCAL/dio/dio.o
+ .debug_str     0x00000000      0x385 Include/MCAL/dio/dio.o
  .comment       0x00000000       0x31 Include/MCAL/dio/dio.o
- .debug_frame   0x00000000       0x74 Include/MCAL/dio/dio.o
+ .debug_frame   0x00000000      0x10c Include/MCAL/dio/dio.o
  .text          0x00000000        0x0 Include/MCAL/exti/exti.o
  .data          0x00000000        0x0 Include/MCAL/exti/exti.o
  .bss           0x00000000        0x0 Include/MCAL/exti/exti.o
@@ -126,7 +92,7 @@ Discarded input sections
  .data          0x00000000        0x0 Include/MCAL/gie/gie.o
  .bss           0x00000000        0x0 Include/MCAL/gie/gie.o
  .debug_line    0x00000000        0x0 Include/MCAL/gie/gie.o
- .debug_str     0x00000000      0x125 Include/MCAL/gie/gie.o
+ .debug_str     0x00000000      0x126 Include/MCAL/gie/gie.o
  .comment       0x00000000       0x31 Include/MCAL/gie/gie.o
  .text          0x00000000        0x0 Include/MCAL/timer/timer.o
  .data          0x00000000        0x0 Include/MCAL/timer/timer.o
@@ -275,8 +241,6 @@ Linker script and memory map
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
 LOAD dio.o
 LOAD Include/APP/app.o
-LOAD Include/HAL/button/button.o
-LOAD Include/HAL/led/led.o
 LOAD Include/HAL/motor_driver/motor_driver.o
 LOAD Include/MCAL/dio/dio.o
 LOAD Include/MCAL/exti/exti.o

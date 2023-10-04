@@ -135,7 +135,7 @@ en_dioErrorStatus DIO_setPinDirection(const st_pinConfig* st_a_pinConfig)
 /* pin      : pin0 ..7       									              */
 /* logic    : 0 or 1 if direction = 0                                         */
 /******************************************************************************/
-en_dioErrorStatus DIO_getPinDirection(const st_pinConfig* st_a_pinConfig, en_pinDirection* en_a_directionStatus)
+en_dioErrorStatus DIO_getPinDirection(st_pinConfig* st_a_pinConfig, en_pinDirection* en_a_directionStatus)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
@@ -143,7 +143,22 @@ en_dioErrorStatus DIO_getPinDirection(const st_pinConfig* st_a_pinConfig, en_pin
 		if (st_a_pinConfig->u8_g_reserved == 0)
 		{
 
-			//Write Funcrion
+			switch(st_a_pinConfig->u8_g_port)
+			{
+				case PORTA_INDEX:
+				*en_a_directionStatus = GET_BIT(DIO_DDRA,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTB_INDEX:
+				*en_a_directionStatus = GET_BIT(DIO_DDRB,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTC_INDEX:
+				*en_a_directionStatus = GET_BIT(DIO_DDRC,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTD_INDEX:
+				*en_a_directionStatus = GET_BIT(DIO_DDRD,st_a_pinConfig->u8_g_pin);
+				break;
+			}
+			st_a_pinConfig->u8_g_direction = *en_a_directionStatus;
 		}
 		else  /* Wrong data casted to pinConfig struct */
 		{
@@ -266,6 +281,7 @@ en_dioErrorStatus DIO_setPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic en_
 		{
 			en_a_retFunction = DIO_WRONG_INPUT;
 		}
+	}
 	else
 	{
 		en_a_retFunction = DIO_WRONG_INPUT;
@@ -293,13 +309,28 @@ en_dioErrorStatus DIO_getPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic* en
 	{
 		if (st_a_pinConfig->u8_g_reserved == 0)
 		{
-
-			//Write Funcrion
+			switch(st_a_pinConfig->u8_g_port)
+			{
+				case PORTA_INDEX:
+				*en_a_bitLogic = GET_BIT(DIO_PORTA,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTB_INDEX:
+				*en_a_bitLogic = GET_BIT(DIO_PORTB,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTC_INDEX:
+				*en_a_bitLogic = GET_BIT(DIO_PORTC,st_a_pinConfig->u8_g_pin);
+				break;
+				case PORTD_INDEX:
+				*en_a_bitLogic = GET_BIT(DIO_PORTD,st_a_pinConfig->u8_g_pin);
+				break;
+			}
+			st_a_pinConfig->u8_g_logic = *en_a_bitLogic;
         }
 		else  /* Wrong data casted to pinConfig struct */
 		{
 			en_a_retFunction = DIO_WRONG_INPUT;
 		}
+	}
 	else
 	{
 		en_a_retFunction = DIO_WRONG_INPUT;
@@ -507,4 +538,45 @@ en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfi
 
 }
 /******************************************************************************/
+en_dioErrorStatus DIO_lockPin(st_pinConfig* st_a_pinConfig)
+{
+	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	if (st_a_pinConfig != NULL)
+	{
+		if (st_a_pinConfig->u8_g_reserved == 0)
+		{
+			st_a_pinConfig->u8_g_reserved = 1;
+		}
+		else
+		{
+			en_a_retFunction = DIO_NOK;
+		}
 
+	}
+	else
+	{
+		en_a_retFunction = DIO_WRONG_INPUT;
+	}
+	return en_a_retFunction;
+}
+en_dioErrorStatus DIO_unlockPin(st_pinConfig* st_a_pinConfig)
+{
+	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	if (st_a_pinConfig != NULL)
+	{
+		if (st_a_pinConfig->u8_g_reserved == 1)
+		{
+			st_a_pinConfig->u8_g_reserved = 0;
+		}
+		else
+		{
+			en_a_retFunction = DIO_NOK;
+		}
+
+	}
+	else
+	{
+		en_a_retFunction = DIO_WRONG_INPUT;
+	}
+	return en_a_retFunction;
+}
