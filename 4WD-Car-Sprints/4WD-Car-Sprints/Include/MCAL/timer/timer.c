@@ -10,8 +10,8 @@
 
 void (*v_g_callbackFunc[8])(void) = { NULL };
 
-u8_returnType TIMER_init(void) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_init(void) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	TIMSK = 0x00;
 	TIFR = 0x00;
 	TIMSK = (TIMER_0_OC_INTERRUPT << OCIE0) | (TIMER_0_OVF_INTERRUPT << TOIE0)
@@ -44,10 +44,10 @@ u8_returnType TIMER_init(void) {
 	OCR2 = 0x00;
 	ASSR = 0x00;
 	#endif
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_start(u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_start(u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -63,12 +63,12 @@ u8_returnType TIMER_start(u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_stop(u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_stop(u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -84,12 +84,12 @@ u8_returnType TIMER_stop(u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3 && u16_a_tTimerValue != NULL){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -103,12 +103,12 @@ u8_returnType TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -123,12 +123,12 @@ u8_returnType TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_load(u16 u16_a_value, u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_load(u16 u16_a_value, u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3 ){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -151,12 +151,12 @@ u8_returnType TIMER_load(u16 u16_a_value, u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_generateNonPwmSignal(u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_generateNonPwmSignal(u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -173,12 +173,12 @@ u8_returnType TIMER_generateNonPwmSignal(u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_generateFastPwmSignal(u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_generateFastPwmSignal(u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -195,12 +195,12 @@ u8_returnType TIMER_generateFastPwmSignal(u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_generatePhasePwmSignal(u8 u8_a_timerNumber) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_generatePhasePwmSignal(u8 u8_a_timerNumber) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
@@ -217,15 +217,15 @@ u8_returnType TIMER_generatePhasePwmSignal(u8 u8_a_timerNumber) {
 			break;
 		}
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if ( NULL == v_a_ptr)
 	{
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
 	else
 	{
@@ -234,44 +234,43 @@ u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)
 			v_g_callbackFunc[u8_a_timerInterruptNum] = v_a_ptr;
 		} 
 		else {
-			u8_a_retFunction = E_NOK;
+			en_a_retFunction = TIMER_WRONG_INPUT;
 		}
 	}
-	return u8_a_retFunction ;
+	return en_a_retFunction ;
 }
 
-u8_returnType TIMER_setICUEdge(u8 u8_a_icEDGE) {
-	
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_setICUEdge(u8 u8_a_icEDGE) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if (u8_a_icEDGE != TIMER_1_IC_FALLING && u8_a_icEDGE != TIMER_1_IC_RISING)
 	{
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
 	else
 	{
 		TCCR1B = (TCCR1B & 0x9F) | (u8_a_icEDGE << ICES1);
 		SET_BIT(TIFR, ICF1);
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 	
 }
-u8_returnType TIMER_getICU(u16 *u16_a_value) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_getICU(u16 *u16_a_value) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	if(u16_a_value != NULL){
 		*u16_a_value = ((u16) ICR1L | ((u16) ICR1H << 8));
 		} else {
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
-u8_returnType TIMER_measureSignal(u32 *u16_a_frequency, u32 *u16_a_timeOn) {
-	u8_returnType u8_a_retFunction = E_OK;
+en_timerError TIMER_measureSignal(u32 *u16_a_frequency, u32 *u16_a_timeOn) {
+	en_timerError en_a_retFunction = TIMER_OK;
 	u16 Ticks[3] = { 0 };
 	u16 Period = 0;
 	u16 Ton = 0;
 	if (NULL == u16_a_frequency || NULL == u16_a_timeOn )
 	{
-		u8_a_retFunction = E_NOK;
+		en_a_retFunction = TIMER_WRONG_INPUT;
 	}
 	else
 	{
@@ -314,7 +313,7 @@ u8_returnType TIMER_measureSignal(u32 *u16_a_frequency, u32 *u16_a_timeOn) {
 			*u16_a_frequency =  (u16) ((d64)((d64)F_CPU / (d64)prescaler)   / (d64) Period);
 			*u16_a_timeOn = (u16) ( ( (d64)prescaler / (d64)((d64)F_CPU / 1000000.0) ) * Ton);
 	}
-	return u8_a_retFunction;
+	return en_a_retFunction;
 }
 void __vector_4(void) {
 	if (v_g_callbackFunc[TIMER2_COMP] != NULL)

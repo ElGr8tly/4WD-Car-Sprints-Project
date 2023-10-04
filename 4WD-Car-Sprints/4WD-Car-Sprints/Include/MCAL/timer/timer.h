@@ -263,7 +263,7 @@ SET_OC1: Set OC1A/OC1B on compare match when up-counting. Clear OC1A/OC1B on com
 ///////////////Enable OR Disable Input Capture Noise Canceler///////////////
 //options: { ENABLE, DISABLE }
 #define ICNC                  DISABLE
-///////////////Choose Falling OR Rising Edge For Input Capture///////////////
+///////////////Choose Falling OR Rising Edge For Input Capture//////////////
 //options: { TIMER_1_IC_FALLING, TIMER_1_IC_RISING }
 #define IC_EDGE               TIMER_1_IC_FALLING
 ///////////////CHOOSE TIMER1 CLOCK SOURCE///////////////
@@ -352,101 +352,104 @@ TM2_PRE_1024    : F_CPU / 1024 (From prescaler)
 #define    TIMER1_OVF           5
 #define    TIMER0_COMP          6
 #define    TIMER0_OVF           7
-
+typedef enum en_timerError{
+	TIMER_OK,
+	TIMER_WRONG_INPUT,
+	TIMER_NOK
+	}en_timerError;
 /***
  * initializes TIMERS based on the selected config, returns void
  * INPUT: void
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_init(void);
+en_timerError TIMER_init(void);
 /***
  * Starts a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to start
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_start(u8 u8cpyTimerNumber);
+en_timerError TIMER_start(u8 u8cpyTimerNumber);
 /***
  * Stops a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to stop
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_stop(u8 u8cpyTimerNumber);
+en_timerError TIMER_stop(u8 u8cpyTimerNumber);
 /***
  * Reads a specific TIMER's current value(counter register) based on input, returns void
  * INPUT: (u8) Timer to read, (u16*) pointer to store the value
  * OUTPUT: (u16) timer current value
  * Returns: void
  * **/
-u8_returnType TIMER_read(u8 u8cpyTimerNumber, u16* u16TimerValue);
+en_timerError TIMER_read(u8 u8cpyTimerNumber, u16* u16TimerValue);
 /***
  * Preloads a specific TIMER value(counter register) based on input, returns void
  * INPUT:(u16) preload value , (u8) Timer to preload
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_preload(u16 u16cpyValue, u8 u8cpyTimerNumber);
+en_timerError TIMER_preload(u16 u16cpyValue, u8 u8cpyTimerNumber);
 /***
  * Loads a specific TIMER value(compare register) based on input, returns void
  * INPUT:(u16) load value , (u8) Timer to load
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_load(u16 u16cpyValue, u8 u8cpyTimerNumber);
+en_timerError TIMER_load(u16 u16cpyValue, u8 u8cpyTimerNumber);
 /***
  * Generates a non-pwm signal from a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to generate signal from
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_generateNonPwmSignal(u8 u8cpyTimerNumber);
+en_timerError TIMER_generateNonPwmSignal(u8 u8cpyTimerNumber);
 /***
  * Generates a fast pwm signal from a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to generate signal from
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_generateFastPwmSignal(u8 u8cpyTimerNumber);
+en_timerError TIMER_generateFastPwmSignal(u8 u8cpyTimerNumber);
 /***
  * Generates a phase correct pwm signal from a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to generate signal from
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_generatePhasePwmSignal(u8 u8cpyTimerNumber);
+en_timerError TIMER_generatePhasePwmSignal(u8 u8cpyTimerNumber);
 /***
  * Specifies the working edge of timer1's input capture unit, returns void
  * INPUT: (u8) Wanted edge
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_setICUEdge(u8 u8cpyIC_EDGE);
+en_timerError TIMER_setICUEdge(u8 u8cpyIC_EDGE);
 /***
  * Reads the value of timer1's input capture unit, returns void
  * INPUT: (u16*) Pointer to store the read value
  * OUTPUT: (u16) captured value
  * Returns: void
  * **/
-u8_returnType TIMER_getICU(u16 *u8cpy_Value);
+en_timerError TIMER_getICU(u16 *u8cpy_Value);
 /***
  * Sets the callback function for the input timer interrupt, returns void
  * INPUT: (u8) timer interrupt name, (*ptr) call back function
  * OUTPUT: void
  * Returns: void
  * **/
-u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void));
+en_timerError TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void));
 /***
  * Reads the value of the input frequency & pulse width from the ICU, returns void
  * INPUT: (u16*) Pointer to store frequency, (u16*) Pointer to store pulse width
  * OUTPUT: (u16) signal frequency, (u16) signal TimeOn
  * Returns: void
  * **/
-u8_returnType TIMER_measureSignal(u32 *u16cpy_frequency, u32 *u16cpy_timeOn);
+en_timerError TIMER_measureSignal(u32 *u16cpy_frequency, u32 *u16cpy_timeOn);
 
 
 
 
 #endif /* TIMER_H_ */
-
