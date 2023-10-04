@@ -5,14 +5,16 @@
  * Author : melgreatly
  */ 
 
-#include <avr/io.h>
-
-
+#include "../Include/LIB/STD_TYPES.h"
+#include "../Include/MCAL/dio/dio.h"
+#include "../Include/APP/app.h"
+#include "../Include/MCAL/exti/exti.h"
 int main(void)
 {
     /* Replace with your application code */
     while (1) 
     {
+		
     }
 }
 

@@ -8,6 +8,7 @@
 /***************************** includes section *************************************************/
 #include "../../LIB/STD_TYPES.h"
 #include "exti.h"
+#include "../../LIB/STD_TYPES.h"
 
 static void (*v_gs_ptrfuncInt0)(void) = NULL ;
 static void (*v_gs_ptrfuncInt1)(void) = NULL ;
