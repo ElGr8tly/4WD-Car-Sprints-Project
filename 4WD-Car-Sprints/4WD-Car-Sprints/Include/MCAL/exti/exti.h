@@ -46,13 +46,26 @@ void __vector_2(void) __attribute__ ((signal,used));
 /* This routine sets the interrupt enable for the external interrupt, INT0 */
 #define EXT_INT0_InterruptEnable()          (SET_BIT(GICR,INTE0))
 /* This routine set the edge detect of the extern interrupt to negative edge */
-#define EXT_INT0_RisingEdgeSet()            (SET_BIT(MCUCR,ISC00); SET_BIT(MCUCR,ISC01))
+#define EXT_INT0_RisingEdgeSet()           {\
+											SET_BIT(MCUCR,ISC00) ;\
+											SET_BIT(MCUCR,ISC01);\
+										   }
 /* This routine set the edge detect of the extern interrupt to positive edge */
-#define EXT_INT0_FallingEdgeSet()           (CLEAR_BIT(MCUCR,ISC00); SET_BIT(MCUCR,ISC01))
+#define EXT_INT0_FallingEdgeSet()          {\
+										    CLEAR_BIT(MCUCR,ISC00);\ 
+											SET_BIT(MCUCR,ISC01);\
+											}
+											
 
-#define EXT_INT0_LowLevelSet()				(CLEAR_BIT(MCUCR,ISC00); CLEAR_BIT(MCUCR,ISC01))
+#define EXT_INT0_LowLevelSet()				{\
+											CLEAR_BIT(MCUCR,ISC00); \
+											CLEAR_BIT(MCUCR,ISC01);\
+											}
 
-#define EXT_INT0_LogicalChangeSet()       (SET_BIT(MCUCR,ISC00); CLEAR_BIT(MCUCR,ISC01))
+#define EXT_INT0_LogicalChangeSet()			{\
+											SET_BIT(MCUCR,ISC00);\ 
+											CLEAR_BIT(MCUCR,ISC01);\
+											}
 
 
 /* This routine clears the interrupt enable for the external interrupt, INT1 */
@@ -60,13 +73,26 @@ void __vector_2(void) __attribute__ ((signal,used));
 /* This routine sets the interrupt enable for the external interrupt, INT0 */
 #define EXT_INT1_InterruptEnable()          (SET_BIT(GICR,INTE1))
 /* This routine set the edge detect of the extern interrupt to negative edge */
-#define EXT_INT1_RisingEdgeSet()            (SET_BIT(MCUCR,ISC10); SET_BIT(MCUCR,ISC11))
+#define EXT_INT1_RisingEdgeSet()            {\
+												SET_BIT(MCUCR,ISC10);\
+												SET_BIT(MCUCR,ISC11);\
+												 
+											}
 /* This routine set the edge detect of the extern interrupt to positive edge */
-#define EXT_INT1_FallingEdgeSet()           (CLEAR_BIT(MCUCR,ISC10); SET_BIT(MCUCR,ISC11))
+#define EXT_INT1_FallingEdgeSet()           {\
+												CLEAR_BIT(MCUCR,ISC10);\ 
+												SET_BIT(MCUCR,ISC11);\
+											}
 
-#define EXT_INT1_LowLevelSet()				(CLEAR_BIT(MCUCR,ISC10); CLEAR_BIT(MCUCR,ISC11))
+#define EXT_INT1_LowLevelSet()				{\
+												CLEAR_BIT(MCUCR,ISC10);\ 
+												CLEAR_BIT(MCUCR,ISC11);\
+											}
 
-#define EXT_INT1_LogicalChangeSet()       (SET_BIT(MCUCR,ISC10); CLEAR_BIT(MCUCR,ISC11))
+#define EXT_INT1_LogicalChangeSet()			{\
+												SET_BIT(MCUCR,ISC10);\ 
+												CLEAR_BIT(MCUCR,ISC11);\
+											}
 
 typedef void (*EXT_InterruptHandler)(void);
 
