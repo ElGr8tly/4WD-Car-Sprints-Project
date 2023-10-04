@@ -120,7 +120,13 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="dio.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Include\APP\app.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\button\button.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\HAL\button\button.c">
@@ -129,10 +135,16 @@
     <Compile Include="Include\HAL\led\led.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\HAL\led\led.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Include\HAL\motor_driver\motor_driver.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\LIB\BIT_MATH.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\LIB\lib.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\LIB\STD_TYPES.h">
@@ -153,11 +165,28 @@
     <Compile Include="Include\MCAL\timer\timer.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\MCAL\timer\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Src\main.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Debug\" />
+    <Folder Include="Debug\Include\" />
+    <Folder Include="Debug\Include\APP\" />
+    <Folder Include="Debug\Include\HAL\" />
+    <Folder Include="Debug\Include\HAL\button\" />
+    <Folder Include="Debug\Include\HAL\led\" />
+    <Folder Include="Debug\Include\HAL\motor_driver\" />
+    <Folder Include="Debug\Include\LIB\" />
+    <Folder Include="Debug\Include\MCAL\" />
+    <Folder Include="Debug\Include\MCAL\dio\" />
+    <Folder Include="Debug\Include\MCAL\exti\" />
+    <Folder Include="Debug\Include\MCAL\gie\" />
+    <Folder Include="Debug\Include\MCAL\timer\" />
+    <Folder Include="Debug\Src\" />
     <Folder Include="Include" />
     <Folder Include="Include\HAL" />
     <Folder Include="Include\HAL\led" />
@@ -171,6 +200,95 @@
     <Folder Include="Include\MCAL\gie" />
     <Folder Include="Include\MCAL\timer" />
     <Folder Include="Src" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="4WD-Car-Sprints.componentinfo.xml">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.eep">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.elf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.hex">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.lss">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.map">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\4WD-Car-Sprints.srec">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\APP\app.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\APP\app.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\button\button.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\button\button.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\led\led.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\led\led.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\motor_driver\motor_driver.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\HAL\motor_driver\motor_driver.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\LIB\lib.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\LIB\lib.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\dio\dio.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\dio\dio.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\exti\exti.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\exti\exti.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\gie\gie.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\gie\gie.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\timer\timer.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Include\MCAL\timer\timer.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\makedep.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Makefile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Src\main.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Src\main.o">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

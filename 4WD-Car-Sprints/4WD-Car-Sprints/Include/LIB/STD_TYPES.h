@@ -15,8 +15,6 @@ typedef enum {
     LOGIC_HIGH
 }en_standardLogic;
 
-
-
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;
 
@@ -30,14 +28,9 @@ typedef signed short int        i16;
 
 typedef signed long  int        i32;
 
-typedef  float                  f32;
+typedef float                   f32;
 
-typedef  double                 d64;
-
-typedef u8                 u8_returnType;
-
-
-
+typedef double					        d64;
 
 
 #endif	/* STD_TYPES_H */
