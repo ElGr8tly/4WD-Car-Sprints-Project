@@ -83,12 +83,6 @@ Disassembly of section .text:
   78:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 0000007c <__vector_4>:
-			*u16_a_frequency =  (u16) ((d64)((d64)F_CPU / (d64)prescaler)   / (d64) Period);
-			*u16_a_timeOn = (u16) ( ( (d64)prescaler / (d64)((d64)F_CPU / 1000000.0) ) * Ton);
-	}
-	return u8_a_retFunction;
-}
-void __vector_4(void) {
   7c:	1f 92       	push	r1
   7e:	0f 92       	push	r0
   80:	0f b6       	in	r0, 0x3f	; 63
@@ -106,14 +100,11 @@ void __vector_4(void) {
   98:	bf 93       	push	r27
   9a:	ef 93       	push	r30
   9c:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER2_COMP] != NULL)
   9e:	e0 91 60 00 	lds	r30, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
   a2:	f0 91 61 00 	lds	r31, 0x0061	; 0x800061 <__DATA_REGION_ORIGIN__+0x1>
   a6:	30 97       	sbiw	r30, 0x00	; 0
   a8:	09 f0       	breq	.+2      	; 0xac <__vector_4+0x30>
-	v_g_callbackFunc[TIMER2_COMP]();
   aa:	09 95       	icall
-}
   ac:	ff 91       	pop	r31
   ae:	ef 91       	pop	r30
   b0:	bf 91       	pop	r27
@@ -133,7 +124,6 @@ void __vector_4(void) {
   cc:	18 95       	reti
 
 000000ce <__vector_5>:
-void __vector_5(void) {
   ce:	1f 92       	push	r1
   d0:	0f 92       	push	r0
   d2:	0f b6       	in	r0, 0x3f	; 63
@@ -151,14 +141,11 @@ void __vector_5(void) {
   ea:	bf 93       	push	r27
   ec:	ef 93       	push	r30
   ee:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER2_OVF] != NULL)
   f0:	e0 91 62 00 	lds	r30, 0x0062	; 0x800062 <__DATA_REGION_ORIGIN__+0x2>
   f4:	f0 91 63 00 	lds	r31, 0x0063	; 0x800063 <__DATA_REGION_ORIGIN__+0x3>
   f8:	30 97       	sbiw	r30, 0x00	; 0
   fa:	09 f0       	breq	.+2      	; 0xfe <__vector_5+0x30>
-	v_g_callbackFunc[TIMER2_OVF]();
   fc:	09 95       	icall
-}
   fe:	ff 91       	pop	r31
  100:	ef 91       	pop	r30
  102:	bf 91       	pop	r27
@@ -178,7 +165,6 @@ void __vector_5(void) {
  11e:	18 95       	reti
 
 00000120 <__vector_6>:
-void __vector_6(void) {
  120:	1f 92       	push	r1
  122:	0f 92       	push	r0
  124:	0f b6       	in	r0, 0x3f	; 63
@@ -196,15 +182,11 @@ void __vector_6(void) {
  13c:	bf 93       	push	r27
  13e:	ef 93       	push	r30
  140:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER1_CAPT] != NULL)
  142:	e0 91 64 00 	lds	r30, 0x0064	; 0x800064 <__DATA_REGION_ORIGIN__+0x4>
  146:	f0 91 65 00 	lds	r31, 0x0065	; 0x800065 <__DATA_REGION_ORIGIN__+0x5>
  14a:	30 97       	sbiw	r30, 0x00	; 0
  14c:	09 f0       	breq	.+2      	; 0x150 <__vector_6+0x30>
-	v_g_callbackFunc[TIMER1_CAPT]();
  14e:	09 95       	icall
-
-}
  150:	ff 91       	pop	r31
  152:	ef 91       	pop	r30
  154:	bf 91       	pop	r27
@@ -224,7 +206,6 @@ void __vector_6(void) {
  170:	18 95       	reti
 
 00000172 <__vector_7>:
-void __vector_7(void) {
  172:	1f 92       	push	r1
  174:	0f 92       	push	r0
  176:	0f b6       	in	r0, 0x3f	; 63
@@ -242,14 +223,11 @@ void __vector_7(void) {
  18e:	bf 93       	push	r27
  190:	ef 93       	push	r30
  192:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER1_COMPA] != NULL)
  194:	e0 91 66 00 	lds	r30, 0x0066	; 0x800066 <__DATA_REGION_ORIGIN__+0x6>
  198:	f0 91 67 00 	lds	r31, 0x0067	; 0x800067 <__DATA_REGION_ORIGIN__+0x7>
  19c:	30 97       	sbiw	r30, 0x00	; 0
  19e:	09 f0       	breq	.+2      	; 0x1a2 <__vector_7+0x30>
-	v_g_callbackFunc[TIMER1_COMPA]();
  1a0:	09 95       	icall
-}
  1a2:	ff 91       	pop	r31
  1a4:	ef 91       	pop	r30
  1a6:	bf 91       	pop	r27
@@ -269,7 +247,6 @@ void __vector_7(void) {
  1c2:	18 95       	reti
 
 000001c4 <__vector_8>:
-void __vector_8(void) {
  1c4:	1f 92       	push	r1
  1c6:	0f 92       	push	r0
  1c8:	0f b6       	in	r0, 0x3f	; 63
@@ -287,14 +264,11 @@ void __vector_8(void) {
  1e0:	bf 93       	push	r27
  1e2:	ef 93       	push	r30
  1e4:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER1_COMPB] != NULL)
  1e6:	e0 91 68 00 	lds	r30, 0x0068	; 0x800068 <__DATA_REGION_ORIGIN__+0x8>
  1ea:	f0 91 69 00 	lds	r31, 0x0069	; 0x800069 <__DATA_REGION_ORIGIN__+0x9>
  1ee:	30 97       	sbiw	r30, 0x00	; 0
  1f0:	09 f0       	breq	.+2      	; 0x1f4 <__vector_8+0x30>
-	v_g_callbackFunc[TIMER1_COMPB]();
  1f2:	09 95       	icall
-}
  1f4:	ff 91       	pop	r31
  1f6:	ef 91       	pop	r30
  1f8:	bf 91       	pop	r27
@@ -314,7 +288,6 @@ void __vector_8(void) {
  214:	18 95       	reti
 
 00000216 <__vector_9>:
-void __vector_9(void) {
  216:	1f 92       	push	r1
  218:	0f 92       	push	r0
  21a:	0f b6       	in	r0, 0x3f	; 63
@@ -332,14 +305,11 @@ void __vector_9(void) {
  232:	bf 93       	push	r27
  234:	ef 93       	push	r30
  236:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER1_OVF] != NULL)
  238:	e0 91 6a 00 	lds	r30, 0x006A	; 0x80006a <__DATA_REGION_ORIGIN__+0xa>
  23c:	f0 91 6b 00 	lds	r31, 0x006B	; 0x80006b <__DATA_REGION_ORIGIN__+0xb>
  240:	30 97       	sbiw	r30, 0x00	; 0
  242:	09 f0       	breq	.+2      	; 0x246 <__vector_9+0x30>
-	v_g_callbackFunc[TIMER1_OVF]();
  244:	09 95       	icall
-}
  246:	ff 91       	pop	r31
  248:	ef 91       	pop	r30
  24a:	bf 91       	pop	r27
@@ -359,7 +329,6 @@ void __vector_9(void) {
  266:	18 95       	reti
 
 00000268 <__vector_10>:
-void __vector_10(void) {
  268:	1f 92       	push	r1
  26a:	0f 92       	push	r0
  26c:	0f b6       	in	r0, 0x3f	; 63
@@ -377,14 +346,11 @@ void __vector_10(void) {
  284:	bf 93       	push	r27
  286:	ef 93       	push	r30
  288:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER0_COMP] != NULL)
  28a:	e0 91 6c 00 	lds	r30, 0x006C	; 0x80006c <__DATA_REGION_ORIGIN__+0xc>
  28e:	f0 91 6d 00 	lds	r31, 0x006D	; 0x80006d <__DATA_REGION_ORIGIN__+0xd>
  292:	30 97       	sbiw	r30, 0x00	; 0
  294:	09 f0       	breq	.+2      	; 0x298 <__vector_10+0x30>
-	v_g_callbackFunc[TIMER0_COMP]();
  296:	09 95       	icall
-}
  298:	ff 91       	pop	r31
  29a:	ef 91       	pop	r30
  29c:	bf 91       	pop	r27
@@ -404,7 +370,6 @@ void __vector_10(void) {
  2b8:	18 95       	reti
 
 000002ba <__vector_11>:
-void __vector_11(void) {
  2ba:	1f 92       	push	r1
  2bc:	0f 92       	push	r0
  2be:	0f b6       	in	r0, 0x3f	; 63
@@ -422,12 +387,10 @@ void __vector_11(void) {
  2d6:	bf 93       	push	r27
  2d8:	ef 93       	push	r30
  2da:	ff 93       	push	r31
-	if (v_g_callbackFunc[TIMER0_OVF] != NULL)
  2dc:	e0 91 6e 00 	lds	r30, 0x006E	; 0x80006e <__DATA_REGION_ORIGIN__+0xe>
  2e0:	f0 91 6f 00 	lds	r31, 0x006F	; 0x80006f <__DATA_REGION_ORIGIN__+0xf>
  2e4:	30 97       	sbiw	r30, 0x00	; 0
  2e6:	09 f0       	breq	.+2      	; 0x2ea <__vector_11+0x30>
-	v_g_callbackFunc[TIMER0_OVF]();
  2e8:	09 95       	icall
  2ea:	ff 91       	pop	r31
  2ec:	ef 91       	pop	r30
@@ -448,6 +411,12 @@ void __vector_11(void) {
  30a:	18 95       	reti
 
 0000030c <main>:
+
+#include <avr/io.h>
+
+
+int main(void)
+{
  30c:	ff cf       	rjmp	.-2      	; 0x30c <main>
 
 0000030e <_exit>:

@@ -126,13 +126,7 @@
     <Compile Include="Include\APP\app.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\HAL\button\button.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\HAL\button\button.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\HAL\led\led.c">
+    <Compile Include="Include\APP\app.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\HAL\led\led.h">
