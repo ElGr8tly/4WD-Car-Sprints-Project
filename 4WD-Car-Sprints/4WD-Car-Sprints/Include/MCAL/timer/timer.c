@@ -4,8 +4,8 @@
 * Created: 10/3/2023 2:09:50 PM
 *  Author: melgreatly
 */
-#include "../../00 LIB/STD_TYPES.h"
-#include "../../00 LIB/BIT_MATH.h"
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 #include "timer.h"
 
 void (*v_g_callbackFunc[8])(void) = { NULL };
@@ -109,7 +109,7 @@ u8_returnType TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue) {
 }
 u8_returnType TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber) {
 	u8_returnType u8_a_retFunction = E_OK;
-	if(u8_a_timerNumber < 3 && u16_a_value != NULL){
+	if(u8_a_timerNumber < 3){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
 			TCNT0 = (u8) u16_a_value;
@@ -129,7 +129,7 @@ u8_returnType TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber) {
 }
 u8_returnType TIMER_load(u16 u16_a_value, u8 u8_a_timerNumber) {
 	u8_returnType u8_a_retFunction = E_OK;
-	if(u8_a_timerNumber < 3 && u16_a_value != NULL){
+	if(u8_a_timerNumber < 3 ){
 		switch (u8_a_timerNumber) {
 			case TIMER_TM0:
 			OCR0 = (u8) u16_a_value;
@@ -231,7 +231,7 @@ u8_returnType TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)
 	{
 		if (u8_a_timerInterruptNum >= 0 && u8_a_timerInterruptNum < 8) 
 		{
-			ptr_func[u8_a_timerInterruptNum] = v_a_ptr;
+			v_g_callbackFunc[u8_a_timerInterruptNum] = v_a_ptr;
 		} 
 		else {
 			u8_a_retFunction = E_NOK;

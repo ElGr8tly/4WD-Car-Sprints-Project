@@ -21,7 +21,7 @@
  /* direction: 0 or 1		        		                      	           */
  /* logic    : 0 or 1 if direction = 0                                         */
  /******************************************************************************/
-en_dioErrorStatus DIO_pinInit(const st_pinConfig* st_a_pinConfig)
+en_dioErrorStatus DIO_pinInitialize(const st_pinConfig* st_a_pinConfig)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
@@ -57,6 +57,7 @@ en_dioErrorStatus DIO_pinInit(const st_pinConfig* st_a_pinConfig)
 /* pin      : pin0 ..7       									        	  */
 /* directio: direction 0 or 1				                      			  */
 /******************************************************************************/
+
 en_dioErrorStatus DIO_setPinDirection(const st_pinConfig* st_a_pinConfig)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
@@ -148,14 +149,14 @@ en_dioErrorStatus DIO_getPinDirection(const st_pinConfig* st_a_pinConfig, en_pin
 		{
 			en_a_retFunction = DIO_WRONG_INPUT;
 		}
+
+	}
 	else
 	{
 		en_a_retFunction = DIO_WRONG_INPUT;
 	}
-
 	return en_a_retFunction;
-
-	}
+}
 /******************************************************************************/
 /* Function: DIO_setPinStatus    @written by: Mohamed Mansour                 */
 /* I/P Parameters: st_pinConfig,en_bitLogic	 						          */
@@ -265,14 +266,13 @@ en_dioErrorStatus DIO_setPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic en_
 		{
 			en_a_retFunction = DIO_WRONG_INPUT;
 		}
-
-	}
 	else
 	{
 		en_a_retFunction = DIO_WRONG_INPUT;
 	}
 
 	return en_a_retFunction;
+
 }
 /******************************************************************************/
 /* Function: DIO_getPinStatus    @written by: Mohamed Mansour                 */
@@ -507,3 +507,4 @@ en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfi
 
 }
 /******************************************************************************/
+

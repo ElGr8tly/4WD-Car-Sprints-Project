@@ -12,8 +12,8 @@
 
 en_buttonError BUTTON_init(st_button *st_a_butt){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, GPIO_DIRECTION_INPUT, GPIO_LOW};
-	if(DIO_pinInit(&st_a_buttonPin) == DIO_OK){
+	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_LOW};
+	if(DIO_pinInit(&st_a_buttonPin) == E_OK){
 		en_a_retFunction = BUTTON_OK;
 	}
 	en_a_retFunction = BUTTON_OP_FAILED;
@@ -23,8 +23,8 @@ en_buttonError BUTTON_init(st_button *st_a_butt){
 
 en_buttonError BUTTON_getValue(st_button *st_a_butt, en_bitLogic *en_a_buttonValue){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, GPIO_DIRECTION_INPUT, GPIO_LOW};
-	if(DIO_getPinStatus(&st_a_buttonPin, en_a_buttonValue) == DIO_OK){
+	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_LOW};
+	if(DIO_getPinStatus(&st_a_buttonPin, en_a_buttonValue) == E_OK){
 		en_a_retFunction = BUTTON_OK;
 	}
 	en_a_retFunction = BUTTON_OP_FAILED;
@@ -34,8 +34,8 @@ en_buttonError BUTTON_getValue(st_button *st_a_butt, en_bitLogic *en_a_buttonVal
 
 en_buttonError BUTTON_connectIPU(st_button *st_a_butt){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, GPIO_DIRECTION_INPUT, GPIO_HIGH};
-	if(DIO_setPinStatus(&st_a_buttonPin, GPIO_HIGH) == DIO_OK){
+	st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_HIGH};
+	if(DIO_setPinStatus(&st_a_buttonPin, DIO_HIGH) == E_OK){
 		en_a_retFunction = BUTTON_OK;
 	}
 	en_a_retFunction = BUTTON_OP_FAILED;

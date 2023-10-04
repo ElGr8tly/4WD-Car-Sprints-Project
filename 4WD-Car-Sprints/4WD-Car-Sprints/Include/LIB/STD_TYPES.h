@@ -15,7 +15,6 @@ typedef enum {
     LOGIC_HIGH
 }en_standardLogic;
 
-
 /* Section : Data Type Declarations */
 typedef unsigned char           u8;
 
