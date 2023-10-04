@@ -87,5 +87,6 @@ en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfi
 en_dioErrorStatus DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic);
 en_dioErrorStatus DIO_getPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic *en_a_bitLogic);
 en_dioErrorStatus DIO_togglePinStatus( st_pinConfig *st_a_pinConfig);
-
+en_dioErrorStatus DIO_lockPin(st_pinConfig* st_a_pinConfig);
+en_dioErrorStatus DIO_unlockPin(st_pinConfig* st_a_pinConfig);
 #endif /* DIO_H_ */
