@@ -153,6 +153,12 @@
     <Compile Include="Include\MCAL\exti\exti.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Include\MCAL\timer\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\MCAL\timer\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Src\main.c">
       <SubType>compile</SubType>
     </Compile>

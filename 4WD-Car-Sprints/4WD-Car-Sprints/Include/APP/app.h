@@ -9,11 +9,13 @@
 #ifndef APP_H_
 #define APP_H_
 
-#define SYSTEM_SEQ  3
 
 #define SHORTEST_SIDE_PERIOD 4
 #define LONGEST_SIDE_PERIOD 6
 #define ROTATE_PERIOD 6
+
+#define SEQUENCE_MAX_NUMBER	4
+
 
 
 typedef struct
@@ -22,6 +24,11 @@ typedef struct
 	u8 period;
 }car_mode;
 
+typedef enum 
+{
+	SYSTEM_ON = 0;
+	SYSTEM_OFF;
+}en_system_status;
 
 void APP_systemStart();
 void APP_longestSide();
@@ -29,6 +36,7 @@ void APP_shortestSide();
 void APP_rotate();
 void APP_stop();
 void APP_systemStop();
-
+void APP_overflowRoutine();
+void APP_pwmRoutine();
 
 #endif /* APP_H_ */
