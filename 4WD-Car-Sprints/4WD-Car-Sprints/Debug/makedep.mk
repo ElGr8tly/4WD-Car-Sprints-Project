@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+dio.c
+
 Include\APP\app.c
 
 Include\HAL\button\button.c
