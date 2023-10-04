@@ -10,6 +10,7 @@
 
 typedef enum en_buttonError{
 BUTTON_OK,
+BUTTON_WRONG_INPUT,
 BUTTON_OP_FAILED
 }en_buttonError;
 
