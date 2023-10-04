@@ -7,17 +7,17 @@
 /***************************** includes section *************************************************/
 #include "gie.h"
 
-u8_returnType GIE_enableGeneralInterrupt(void)
+en_gieErrorStatus GIE_enableGeneralInterrupt(void)
 {
-	u8_returnType u8_a_retFunction = E_OK;
+	en_gieErrorStatus u8_a_retFunction = GIE_OK;
 	SET_BIT(SREG, GLOBAL_INTERRUPT_ENABLE_BIT);
 	return u8_a_retFunction;
 	
 }
 
-u8_returnType GIE_disableGeneralInterrupt(void)
+en_gieErrorStatus GIE_disableGeneralInterrupt(void)
 {
-	u8_returnType u8_a_retFunction = E_OK;
+	en_gieErrorStatus u8_a_retFunction = GIE_OK;
 	CLEAR_BIT(SREG, GLOBAL_INTERRUPT_ENABLE_BIT);
 	return u8_a_retFunction;
 	

@@ -12,8 +12,13 @@
 #define SREG							*((volatile u8 *)0x5F)
 #define GLOBAL_INTERRUPT_ENABLE_BIT		7
 
-u8_returnType GIE_enableGeneralInterrupt(void);
+typedef enum {
+	GIE_OK = 0,
+	GIEO_NOK,
+}en_gieErrorStatus;
 
-u8_returnType GIE_disableGeneralInterrupt(void);
+en_gieErrorStatus GIE_enableGeneralInterrupt(void);
+
+en_gieErrorStatus GIE_disableGeneralInterrupt(void);
 
 #endif /* GIE_H_ */
