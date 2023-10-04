@@ -92,6 +92,8 @@ typedef struct{
 typedef enum {
 	EXTI_OK = 0,
 	EXTI_NOK,
+	EXTI_WRONG_DATA,
+
 }en_extiErrorStatus;
 
 en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj);
