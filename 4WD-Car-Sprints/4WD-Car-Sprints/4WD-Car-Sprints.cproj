@@ -138,9 +138,6 @@
     <Compile Include="Include\LIB\BIT_MATH.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\LIB\lib.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="Include\LIB\STD_TYPES.h">
       <SubType>compile</SubType>
     </Compile>
@@ -153,7 +150,7 @@
     <Compile Include="Include\MCAL\exti\exti.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\MCAL\gie\gie.c">
+    <Compile Include="Include\MCAL\exti\exti.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\MCAL\timer\timer.c">
