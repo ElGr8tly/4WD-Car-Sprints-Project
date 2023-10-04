@@ -6,10 +6,6 @@ dio.c
 
 Include\APP\app.c
 
-Include\HAL\button\button.c
-
-Include\HAL\led\led.c
-
 Include\HAL\motor_driver\motor_driver.c
 
 Include\MCAL\dio\dio.c
