@@ -75,15 +75,17 @@ typedef struct {
     u8 u8_g_pin : 3;       /* @ref en_pinIndex */
     u8 u8_g_direction : 1; /* @ref en_pinDirection */
     u8 u8_g_logic : 1;     /* @ref en_bitLogic */
-    u8 u8_g_reserved : 1;  /* @ref always zero to test  */
+    u8 u8_g_reserved : 1;  /* @ref Locked or Available  */
 }st_pinConfig;
 
 /* Section: Function Declarations */
-en_dioErrorStatus DIO_pinInit(const st_pinConfig *st_a_pinConfig);//greatly
-en_dioErrorStatus DIO_setPinDirection(const st_pinConfig *st_a_pinConfig);//mansour
-en_dioErrorStatus DIO_getPinDirection(const st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus);//greatly
-en_dioErrorStatus DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic);//mansour
-en_dioErrorStatus DIO_getPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic *en_a_bitLogic);//greatly
-en_dioErrorStatus DIO_togglePinStatus( st_pinConfig *st_a_pinConfig);//mansour
+en_dioErrorStatus DIO_pinInitialize(const st_pinConfig *st_a_pinConfig);
+en_dioErrorStatus DIO_setPinDirection(const st_pinConfig *st_a_pinConfig);
+en_dioErrorStatus DIO_getPinDirection(const st_pinConfig *st_a_pinConfig, en_pinDirection *en_a_directionStatus);
+en_dioErrorStatus DIO_setPinPullupResistor(const st_pinConfig* st_a_pinConfig);
+en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfig);
+en_dioErrorStatus DIO_setPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic en_a_bitLogic);
+en_dioErrorStatus DIO_getPinStatus( st_pinConfig *st_a_pinConfig, en_bitLogic *en_a_bitLogic);
+en_dioErrorStatus DIO_togglePinStatus( st_pinConfig *st_a_pinConfig);
 
 #endif /* DIO_H_ */

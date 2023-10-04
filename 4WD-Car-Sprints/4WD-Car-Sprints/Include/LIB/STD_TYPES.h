@@ -30,8 +30,7 @@ typedef signed long  int        i32;
 
 typedef float                   f32;
 
-typedef double					        d64;
-
+typedef double					d64;
 
 #endif	/* STD_TYPES_H */
 
