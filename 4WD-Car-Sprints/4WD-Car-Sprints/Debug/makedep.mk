@@ -16,7 +16,5 @@ Include\MCAL\exti\exti.c
 
 Include\MCAL\gie\gie.c
 
-Include\MCAL\timer\timer.c
-
 Src\main.c
 
