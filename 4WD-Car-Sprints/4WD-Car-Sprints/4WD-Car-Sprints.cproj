@@ -126,19 +126,16 @@
     <Compile Include="Include\APP\app.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Include\APP\HAL\button\button.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\APP\HAL\led\led.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="Include\APP\HAL\motor_driver\motor_driver.c">
+    <Compile Include="Include\HAL\button\button.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\HAL\button\button.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\HAL\led\led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Include\HAL\led\led.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Include\HAL\motor_driver\motor_driver.c">
@@ -189,11 +186,8 @@
     <Folder Include="Debug\Include\MCAL\exti\" />
     <Folder Include="Debug\Include\MCAL\gie\" />
     <Folder Include="Debug\Include\MCAL\timer\" />
+    <Folder Include="Debug\Src\" />
     <Folder Include="Include" />
-    <Folder Include="Include\APP\HAL\" />
-    <Folder Include="Include\APP\HAL\button\" />
-    <Folder Include="Include\APP\HAL\led\" />
-    <Folder Include="Include\APP\HAL\motor_driver\" />
     <Folder Include="Include\HAL" />
     <Folder Include="Include\HAL\led" />
     <Folder Include="Include\HAL\button" />
@@ -204,6 +198,7 @@
     <Folder Include="Include\MCAL\dio" />
     <Folder Include="Include\MCAL\exti" />
     <Folder Include="Include\MCAL\gie" />
+    <Folder Include="Include\MCAL\timer" />
     <Folder Include="Src" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +281,12 @@
       <SubType>compile</SubType>
     </None>
     <None Include="Debug\Makefile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Src\main.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Src\main.o">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>
