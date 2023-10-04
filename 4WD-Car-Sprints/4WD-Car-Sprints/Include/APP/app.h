@@ -8,12 +8,50 @@
 
 #ifndef APP_H_
 #define APP_H_
-typedef enum{
-	STOP_STATUS = 0;
+
+/* defines */
+#include "../LIB/STD_TYPES.h"
+#include "../MCAL/dio/dio.h"
+#include "../MCAL/exti/exti.h"
+#include "../MCAL/gie/gie.h"
+#include "../MCAL/timer/timer.h"
+#include "../HAL/button/button.h"
+#include "../HAL/led/led.h"
+#include "../HAL/motor.h"
+
+/**********************************************/
+#define SHORTEST_SIDE_PERIOD	4 /*  2 sec */
+#define LONGEST_SIDE_PERIOD		6 /*  3 sec */
+#define ROTATE_PERIOD			2 /*  1 sec */
+
+#define SEQUENCE_MAX_NUMBER		4 /*  Array size */
+
+typedef enum {
+	APP_OK = 0,
+	APP_NOK,
+	APP_WRONG_INPUT,
+}en_appErrorStatus;
+
+typedef struct
+{
+	en_appErrorStatus (* ptr_g_Function)(void);
+	u8 period;
+}st_carMode;
+
+typedef enum 
+{
+	SYSTEM_ON = 0;
+	SYSTEM_OFF;
 	START_PRESSED;
-	
-	};
+}en_systemStatus;
 
-
+en_appErrorStatus APP_systemStart();
+en_appErrorStatus APP_longestSide();
+en_appErrorStatus APP_shortestSide();
+en_appErrorStatus APP_rotate();
+en_appErrorStatus APP_stop();
+en_appErrorStatus APP_systemStop();
+en_appErrorStatus APP_overflowRoutine();
+en_appErrorStatus APP_pwmRoutine();
 
 #endif /* APP_H_ */

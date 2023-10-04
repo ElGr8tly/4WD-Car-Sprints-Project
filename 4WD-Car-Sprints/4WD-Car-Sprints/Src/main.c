@@ -5,14 +5,20 @@
  * Author : melgreatly
  */ 
 
-#include <avr/io.h>
-
+#include "../Include/APP/app.h"
 
 int main(void)
 {
     /* Replace with your application code */
     while (1) 
     {
+		if(en_g_carStatus == SYSTEM_ON)
+		{
+			if(u8_g_halfSecondStop == 1)
+			{
+				
+			}
+		}
     }
 }
 
