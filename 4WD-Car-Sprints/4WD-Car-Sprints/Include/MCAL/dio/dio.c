@@ -4,6 +4,7 @@
  *  Author: Elgreatly and Mansour
  */
 #include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 #include "dio.h"
 
  /* Section: Function Definitions */
@@ -24,13 +25,12 @@
 en_dioErrorStatus DIO_pinInitialize(const st_pinConfig* st_a_pinConfig)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
-	
 	if (st_a_pinConfig != NULL)
 	{
 		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 			en_a_retFunction &= DIO_setPinDirection(st_a_pinConfig);
-			en_a_retFunction &= DIO_setPinStatus(st_a_pinConfig, st_a_pinConfig->u8_g_logic);
+			en_a_retFunction &= DIO_setPinStatus((st_pinConfig*) st_a_pinConfig, st_a_pinConfig->u8_g_logic);
 		}
 		else  /* Wrong data casted to pinConfig struct */
 		{

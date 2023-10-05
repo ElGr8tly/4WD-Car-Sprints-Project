@@ -11,6 +11,7 @@
 
 /********************* INCLUDES SECTION ***********************/
 #include "../LIB/STD_TYPES.h"
+#include "../LIB/BIT_MATH.h"
 #include "../MCAL/dio/dio.h"
 #include "../MCAL/exti/exti.h"
 #include "../MCAL/gie/gie.h"
@@ -51,7 +52,7 @@ typedef enum
 
 
 /********************* FUNCTIONS PROTOTYPES  **********************/
-
+en_appErrorStatus APP_init();
 void APP_systemStart();
 void APP_systemStop();
 void APP_overflowRoutine();
@@ -59,7 +60,7 @@ void APP_pwmRoutine();
 en_appErrorStatus APP_longestSide();
 en_appErrorStatus APP_shortestSide();
 en_appErrorStatus APP_rotate();
-en_appErrorStatus APP_stop();
+en_appErrorStatus APP_temporaryStop();
 
 
 

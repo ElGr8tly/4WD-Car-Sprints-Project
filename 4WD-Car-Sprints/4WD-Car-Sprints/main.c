@@ -4,23 +4,42 @@
  * Created: 10/3/2023 2:00:33 PM
  * Author : melgreatly
  */ 
-
+#include "Include/LIB/STD_TYPES.h"
 #include "Include/APP/app.h"
+
+/*global variables*/
 extern en_systemStatus en_g_carStatus ;
 extern en_systemStatus u8_g_halfSecondStop ;
-u8 u8_g_pwmDutyCycle = 231;
+extern st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER];
+extern u8 u8_g_sequenceNumber;
 
+/************************************************************/
 int main(void)
 {
-    /* Replace with your application code */
+	DIO_setPinDirection((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK});
+	DIO_setPinStatus((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK},DIO_HIGH);
+	/*st_leds led = {PORTC_INDEX,DIO_PIN7};
+	LED_init(&led);
+	
+	LED_on(&led);
+	
+	APP_init();*/
     while (1) 
     {
 		if(en_g_carStatus == SYSTEM_ON)
 		{
-			if(u8_g_halfSecondStop == 1)
+			if(u8_g_halfSecondStop != 1)
 			{
-				
+				st_g_systemSequence[u8_g_sequenceNumber].ptr_g_Function();
 			}
+			else
+			{
+				APP_temporaryStop();
+			}
+		}
+		else
+		{
+			
 		}
     }
 }

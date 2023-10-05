@@ -17,7 +17,7 @@
 #define MOTOR_PIN_4           DIO_PIN3
 
 /* Section: Global Variables */
-st_pinConfig MOTOR_LeftMotorDirectionControl [2] =
+st_pinConfig st_g_leftMotorDirectionControl [2] =
 {
     
   { /*Pin D4*/
@@ -36,7 +36,7 @@ st_pinConfig MOTOR_LeftMotorDirectionControl [2] =
   .u8_g_reserved = DIO_UNLOCK
   }
 };
-st_pinConfig MOTOR_RightMotorDirectionControl[2] =
+st_pinConfig st_g_rightMotorDirectionControl[2] =
 {
 
   { /*Pin D6*/
@@ -57,62 +57,62 @@ st_pinConfig MOTOR_RightMotorDirectionControl[2] =
 };
 /***********************************************************************************************/
 /* Module APIs */
-en_motorErrorStatus MOTOR_DriverInitialize()
+en_motorErrorStatus MOTOR_driverInitialize()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
-    en_a_retFunction |= DIO_pinInitialize(&(MOTOR_LeftMotorDirectionControl[0]));
-    en_a_retFunction |= DIO_pinInitialize(&(MOTOR_LeftMotorDirectionControl[1]));
-    en_a_retFunction |= DIO_pinInitialize(&(MOTOR_RightMotorDirectionControl[0]));
-    en_a_retFunction |= DIO_pinInitialize(&(MOTOR_RightMotorDirectionControl[1]));
+    en_a_retFunction |= DIO_pinInitialize(&(st_g_leftMotorDirectionControl[0]));
+    en_a_retFunction |= DIO_pinInitialize(&(st_g_leftMotorDirectionControl[1]));
+    en_a_retFunction |= DIO_pinInitialize(&(st_g_rightMotorDirectionControl[0]));
+    en_a_retFunction |= DIO_pinInitialize(&(st_g_rightMotorDirectionControl[1]));
 
     return en_a_retFunction;
 }
-en_motorErrorStatus MOTOR_LeftMotorForwardDirection()
+en_motorErrorStatus MOTOR_leftMotorForwardDirection()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
-    en_a_retFunction |= DIO_setPinStatus(&(MOTOR_LeftMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction |= DIO_setPinStatus(&(MOTOR_LeftMotorDirectionControl[1]), DIO_LOW);
+    en_a_retFunction |= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[0]), DIO_HIGH);
+    en_a_retFunction |= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[1]), DIO_LOW);
 
     return en_a_retFunction;
 }
-en_motorErrorStatus MOTOR_LeftMotorBackwardDirection()
+en_motorErrorStatus MOTOR_leftMotorBackwardDirection()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_LeftMotorDirectionControl[0]), DIO_LOW);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_LeftMotorDirectionControl[1]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[0]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[1]), DIO_HIGH);
 
     return en_a_retFunction;
 }
-en_motorErrorStatus MOTOR_RightMotorForwardDirection()
+en_motorErrorStatus MOTOR_rightMotorForwardDirection()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[1]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[0]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[1]), DIO_LOW);
 
     return en_a_retFunction;
 }
-en_motorErrorStatus MOTOR_RightMotorBackwardDirection()
+en_motorErrorStatus MOTOR_rightMotorBackwardDirection()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[0]), DIO_LOW);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[1]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[0]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[1]), DIO_HIGH);
 
     return en_a_retFunction;
 }
-en_motorErrorStatus MOTOR_StopMotorDirection()
+en_motorErrorStatus MOTOR_stopMotorDirection()
 {
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
 
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[1]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(MOTOR_RightMotorDirectionControl[1]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[0]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[1]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[0]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[1]), DIO_HIGH);
 
     return en_a_retFunction;
 }
