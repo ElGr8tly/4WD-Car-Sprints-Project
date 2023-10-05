@@ -6,6 +6,7 @@
  */ 
 /***************************** includes section *************************************************/
 #include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 #include "gie.h"
 
 en_gieErrorStatus GIE_enableGeneralInterrupt(void)

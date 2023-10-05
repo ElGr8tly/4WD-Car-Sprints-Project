@@ -17,12 +17,12 @@ typedef enum {
 
 /* Section : Function Declarations */
 
-en_motorErrorStatus MOTOR_DriverInitialize();
-en_motorErrorStatus MOTOR_LeftMotorForwardDirection();
-en_motorErrorStatus MOTOR_LeftMotorBackwardDirection();
-en_motorErrorStatus MOTOR_RightMotorForwardDirection();
-en_motorErrorStatus MOTOR_RightMotorBackwardDirection();
-en_motorErrorStatus MOTOR_StopMotorDirection();
+en_motorErrorStatus MOTOR_driverInitialize();
+en_motorErrorStatus MOTOR_leftMotorForwardDirection();
+en_motorErrorStatus MOTOR_leftMotorBackwardDirection();
+en_motorErrorStatus MOTOR_rightMotorForwardDirection();
+en_motorErrorStatus MOTOR_rightMotorBackwardDirection();
+en_motorErrorStatus MOTOR_stopMotorDirection();
 
 #endif	/* MOTOR_DRIVER_L298N_H */
 

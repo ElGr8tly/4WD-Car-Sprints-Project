@@ -7,6 +7,7 @@
 
 /***************************** includes section *************************************************/
 #include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
 #include "../gie/gie.h"
 #include "exti.h"
 
