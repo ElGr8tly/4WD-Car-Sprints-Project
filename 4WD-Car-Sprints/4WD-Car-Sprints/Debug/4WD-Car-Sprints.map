@@ -49,19 +49,21 @@ Discarded input sections
  .bss           0x00000000        0x0 Include/APP/app.o
  .text.APP_overflowRoutine
                 0x00000000       0x70 Include/APP/app.o
- .text.APP_pwmRoutine
-                0x00000000        0x2 Include/APP/app.o
  .text.APP_longestSide
                 0x00000000        0x2 Include/APP/app.o
  .text.APP_systemStop
                 0x00000000        0x8 Include/APP/app.o
+ .text.APP_pwmRoutine
+                0x00000000       0x5a Include/APP/app.o
  .text.APP_systemStart
                 0x00000000       0x14 Include/APP/app.o
  .text.APP_init
-                0x00000000       0xb0 Include/APP/app.o
+                0x00000000       0xbc Include/APP/app.o
  .text.APP_stop
                 0x00000000        0x2 Include/APP/app.o
- .bss.i8_gs_overFlowCounter.1818
+ .bss.u8_a_flag.1822
+                0x00000000        0x1 Include/APP/app.o
+ .bss.i8_gs_overFlowCounter.1819
                 0x00000000        0x1 Include/APP/app.o
  .data.st_g_rotateLed
                 0x00000000        0x3 Include/APP/app.o
@@ -85,14 +87,14 @@ Discarded input sections
                 0x00000000        0x1 Include/APP/app.o
  .data.en_g_carStatus
                 0x00000000        0x1 Include/APP/app.o
- .debug_info    0x00000000      0x6db Include/APP/app.o
- .debug_abbrev  0x00000000      0x1af Include/APP/app.o
+ .debug_info    0x00000000      0x79b Include/APP/app.o
+ .debug_abbrev  0x00000000      0x1c0 Include/APP/app.o
  .debug_loc     0x00000000       0x74 Include/APP/app.o
  .debug_aranges
                 0x00000000       0x50 Include/APP/app.o
  .debug_ranges  0x00000000       0x40 Include/APP/app.o
- .debug_line    0x00000000      0x2c4 Include/APP/app.o
- .debug_str     0x00000000      0x620 Include/APP/app.o
+ .debug_line    0x00000000      0x2fa Include/APP/app.o
+ .debug_str     0x00000000      0x65a Include/APP/app.o
  .comment       0x00000000       0x31 Include/APP/app.o
  .debug_frame   0x00000000       0x90 Include/APP/app.o
  COMMON         0x00000000        0x8 Include/APP/app.o
@@ -112,26 +114,26 @@ Discarded input sections
                 0x00000000       0x30 Include/HAL/button/button.o
  .debug_ranges  0x00000000       0x20 Include/HAL/button/button.o
  .debug_line    0x00000000      0x17a Include/HAL/button/button.o
- .debug_str     0x00000000      0x320 Include/HAL/button/button.o
+ .debug_str     0x00000000      0x31f Include/HAL/button/button.o
  .comment       0x00000000       0x31 Include/HAL/button/button.o
  .debug_frame   0x00000000       0x74 Include/HAL/button/button.o
  .text          0x00000000        0x0 Include/HAL/led/led.o
  .data          0x00000000        0x0 Include/HAL/led/led.o
  .bss           0x00000000        0x0 Include/HAL/led/led.o
  .text.LED_init
-                0x00000000       0x56 Include/HAL/led/led.o
+                0x00000000       0x54 Include/HAL/led/led.o
  .text.LED_on   0x00000000       0x5a Include/HAL/led/led.o
  .text.LED_off  0x00000000       0x58 Include/HAL/led/led.o
  .text.LED_toggle
                 0x00000000       0x6c Include/HAL/led/led.o
- .debug_info    0x00000000      0x399 Include/HAL/led/led.o
- .debug_abbrev  0x00000000      0x15a Include/HAL/led/led.o
+ .debug_info    0x00000000      0x375 Include/HAL/led/led.o
+ .debug_abbrev  0x00000000      0x137 Include/HAL/led/led.o
  .debug_loc     0x00000000      0x3b4 Include/HAL/led/led.o
  .debug_aranges
                 0x00000000       0x38 Include/HAL/led/led.o
  .debug_ranges  0x00000000       0x28 Include/HAL/led/led.o
- .debug_line    0x00000000      0x206 Include/HAL/led/led.o
- .debug_str     0x00000000      0x2ea Include/HAL/led/led.o
+ .debug_line    0x00000000      0x200 Include/HAL/led/led.o
+ .debug_str     0x00000000      0x2ef Include/HAL/led/led.o
  .comment       0x00000000       0x31 Include/HAL/led/led.o
  .debug_frame   0x00000000       0xc4 Include/HAL/led/led.o
  .text          0x00000000        0x0 Include/HAL/motor_driver/motor.o
@@ -160,7 +162,7 @@ Discarded input sections
                 0x00000000       0x48 Include/HAL/motor_driver/motor.o
  .debug_ranges  0x00000000       0x38 Include/HAL/motor_driver/motor.o
  .debug_line    0x00000000      0x19e Include/HAL/motor_driver/motor.o
- .debug_str     0x00000000      0x409 Include/HAL/motor_driver/motor.o
+ .debug_str     0x00000000      0x408 Include/HAL/motor_driver/motor.o
  .comment       0x00000000       0x31 Include/HAL/motor_driver/motor.o
  .debug_frame   0x00000000       0x84 Include/HAL/motor_driver/motor.o
  .text          0x00000000        0x0 Include/MCAL/dio/dio.o
@@ -193,7 +195,7 @@ Discarded input sections
                 0x00000000       0x68 Include/MCAL/dio/dio.o
  .debug_ranges  0x00000000      0x1d8 Include/MCAL/dio/dio.o
  .debug_line    0x00000000      0x531 Include/MCAL/dio/dio.o
- .debug_str     0x00000000      0x3c8 Include/MCAL/dio/dio.o
+ .debug_str     0x00000000      0x3c7 Include/MCAL/dio/dio.o
  .comment       0x00000000       0x31 Include/MCAL/dio/dio.o
  .debug_frame   0x00000000      0x12c Include/MCAL/dio/dio.o
  .text          0x00000000        0x0 Include/MCAL/exti/exti.o
@@ -216,7 +218,7 @@ Discarded input sections
                 0x00000000       0x28 Include/MCAL/gie/gie.o
  .debug_ranges  0x00000000       0x18 Include/MCAL/gie/gie.o
  .debug_line    0x00000000       0xa5 Include/MCAL/gie/gie.o
- .debug_str     0x00000000      0x201 Include/MCAL/gie/gie.o
+ .debug_str     0x00000000      0x200 Include/MCAL/gie/gie.o
  .comment       0x00000000       0x31 Include/MCAL/gie/gie.o
  .debug_frame   0x00000000       0x34 Include/MCAL/gie/gie.o
  .text          0x00000000        0x0 Include/MCAL/timer/timer.o
@@ -251,6 +253,8 @@ Discarded input sections
  .text          0x00000000        0x0 main.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
+ .data.u8_g_pwmDutyCycle
+                0x00000000        0x1 main.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
@@ -740,26 +744,26 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x116c
+.debug_info     0x00000000     0x1188
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_info    0x000004e6      0x5c9 Include/MCAL/exti/exti.o
  .debug_info    0x00000aaf      0x5f5 Include/MCAL/timer/timer.o
- .debug_info    0x000010a4       0xc8 main.o
+ .debug_info    0x000010a4       0xe4 main.o
 
-.debug_abbrev   0x00000000      0x844
+.debug_abbrev   0x00000000      0x862
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x18b Include/MCAL/exti/exti.o
  .debug_abbrev  0x0000062e      0x197 Include/MCAL/timer/timer.o
- .debug_abbrev  0x000007c5       0x7f main.o
+ .debug_abbrev  0x000007c5       0x9d main.o
 
-.debug_line     0x00000000      0xab6
+.debug_line     0x00000000      0xadd
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_line    0x00000116      0x21d Include/MCAL/exti/exti.o
  .debug_line    0x00000333      0x730 Include/MCAL/timer/timer.o
- .debug_line    0x00000a63       0x53 main.o
+ .debug_line    0x00000a63       0x7a main.o
 
 .debug_frame    0x00000000      0x508
  *(.debug_frame)
@@ -767,15 +771,15 @@ END GROUP
  .debug_frame   0x000000f4      0x3f0 Include/MCAL/timer/timer.o
  .debug_frame   0x000004e4       0x24 main.o
 
-.debug_str      0x00000000      0x79d
+.debug_str      0x00000000      0x7ae
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x35e Include/MCAL/exti/exti.o
-                                0x36a (size before relaxing)
- .debug_str     0x000004f4      0x242 Include/MCAL/timer/timer.o
-                                0x3ad (size before relaxing)
- .debug_str     0x00000736       0x67 main.o
-                                0x1d2 (size before relaxing)
+ .debug_str     0x00000196      0x35d Include/MCAL/exti/exti.o
+                                0x369 (size before relaxing)
+ .debug_str     0x000004f3      0x242 Include/MCAL/timer/timer.o
+                                0x3ac (size before relaxing)
+ .debug_str     0x00000735       0x79 main.o
+                                0x1e3 (size before relaxing)
 
 .debug_loc      0x00000000     0x132c
  *(.debug_loc)
