@@ -69,7 +69,7 @@ en_buttonError BUTTON_init(st_button *st_a_butt){
 	en_buttonError en_a_retFunction = BUTTON_OK;
 	if(st_a_butt->port < 4 && st_a_butt->pin < 8){
 		st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_LOW};
-		if(DIO_pinInit(&st_a_buttonPin) == DIO_OK){
+		if(DIO_pinInitialize(&st_a_buttonPin) == DIO_OK){
 			en_a_retFunction = BUTTON_OK;
 			} else {
 			en_a_retFunction = BUTTON_OP_FAILED;
