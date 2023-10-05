@@ -206,7 +206,7 @@ EXT_RISING  : External clock source on T0 pin. Clock on rising edge.
 #define TIMER_0_CLK           PRE_8
 ///////////////ENABLE TIMER0 INTERRUPTS///////////////
 #define TIMER_0_OC_INTERRUPT  DISABLE
-#define TIMER_0_OVF_INTERRUPT DISABLE
+#define TIMER_0_OVF_INTERRUPT ENABLE
 /***************************************/
 /*************TIMER1 CONFIG*************/
 /***************************************/

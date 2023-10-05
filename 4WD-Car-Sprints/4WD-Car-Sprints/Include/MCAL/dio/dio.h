@@ -5,7 +5,6 @@
  *  Author: Mansour and El-Greatly
  */ 
 
-
 #ifndef DIO_H_
 #define DIO_H_
 
@@ -39,6 +38,11 @@ typedef enum {
     DIO_LOW = 0,
     DIO_HIGH
 }en_bitLogic;
+
+typedef enum {
+    DIO_UNLOCK = 0,
+    DIO_LOCK
+}en_bitLock;
 
 typedef enum {
     DIO_DIRECTION_OUTPUT = 0,

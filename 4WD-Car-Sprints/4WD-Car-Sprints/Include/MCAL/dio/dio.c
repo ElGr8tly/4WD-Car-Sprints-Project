@@ -24,9 +24,10 @@
 en_dioErrorStatus DIO_pinInitialize(const st_pinConfig* st_a_pinConfig)
 {
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
+	
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 			en_a_retFunction &= DIO_setPinDirection(st_a_pinConfig);
 			en_a_retFunction &= DIO_setPinStatus(st_a_pinConfig, st_a_pinConfig->u8_g_logic);
@@ -63,7 +64,7 @@ en_dioErrorStatus DIO_setPinDirection(const st_pinConfig* st_a_pinConfig)
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 
 			switch (st_a_pinConfig->u8_g_port)
@@ -140,7 +141,7 @@ en_dioErrorStatus DIO_getPinDirection(st_pinConfig* st_a_pinConfig, en_pinDirect
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 
 			switch(st_a_pinConfig->u8_g_port)
@@ -189,7 +190,7 @@ en_dioErrorStatus DIO_setPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic en_
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 
 			en_a_bitLogic &= 1;
@@ -307,7 +308,7 @@ en_dioErrorStatus DIO_getPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic* en
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 			switch(st_a_pinConfig->u8_g_port)
 			{
@@ -357,13 +358,13 @@ en_dioErrorStatus DIO_togglePinStatus(st_pinConfig* st_a_pinConfig)
 	en_bitLogic en_a_bitLogic = DIO_HIGH;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 
 			en_a_retFunction = DIO_getPinStatus(st_a_pinConfig, &en_a_bitLogic);
 			if (en_a_retFunction == DIO_OK)
 			{
-				en_a_bitLogic ^= 1;
+				en_a_bitLogic ^= LOGIC_HIGH;
 				en_a_retFunction = DIO_setPinStatus(st_a_pinConfig, en_a_bitLogic);
 			}
 		}
@@ -396,7 +397,7 @@ en_dioErrorStatus DIO_setPinPullupResistor(const st_pinConfig* st_a_pinConfig)
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 			switch (st_a_pinConfig->u8_g_port)
 			{
@@ -474,7 +475,7 @@ en_dioErrorStatus DIO_disablePinPullupResistor(const st_pinConfig* st_a_pinConfi
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 			switch (st_a_pinConfig->u8_g_port)
 			{
@@ -543,9 +544,9 @@ en_dioErrorStatus DIO_lockPin(st_pinConfig* st_a_pinConfig)
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 0)
+		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
-			st_a_pinConfig->u8_g_reserved = 1;
+			st_a_pinConfig->u8_g_reserved = DIO_LOCK;
 		}
 		else
 		{
@@ -564,9 +565,9 @@ en_dioErrorStatus DIO_unlockPin(st_pinConfig* st_a_pinConfig)
 	en_dioErrorStatus en_a_retFunction = DIO_OK;
 	if (st_a_pinConfig != NULL)
 	{
-		if (st_a_pinConfig->u8_g_reserved == 1)
+		if (st_a_pinConfig->u8_g_reserved == DIO_LOCK)
 		{
-			st_a_pinConfig->u8_g_reserved = 0;
+			st_a_pinConfig->u8_g_reserved = DIO_UNLOCK;
 		}
 		else
 		{
