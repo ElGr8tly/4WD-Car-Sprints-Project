@@ -52,7 +52,7 @@ void __vector_2(void) __attribute__ ((signal,used));
 											} while(0)
 /* This routine set the edge detect of the extern interrupt to positive edge */
 #define  EXT_INT0_FallingEdgeSet()           do {\
-												CLEAR_BIT(MCUCR, ISC00);\ 
+												CLEAR_BIT(MCUCR, ISC00);\
 												SET_BIT(MCUCR, ISC01); \
 											} while(0)
 

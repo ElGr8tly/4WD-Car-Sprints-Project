@@ -22,7 +22,7 @@ int main(void)
 	//DIO_setPinStatus((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK},DIO_HIGH);
 	
 	
-	//APP_init();
+	APP_init();
 	//MOTOR_stopMotorDirection();
 	//MOTOR_leftMotorForwardDirection();
 	//MOTOR_rightMotorBackwardDirection();	
@@ -32,7 +32,7 @@ int main(void)
     while (1) 
     {
 	
-		/*if(en_g_carStatus == SYSTEM_ON)
+		if(en_g_carStatus == SYSTEM_ON)
 		{
 			if(u8_g_halfSecondStop != 1)
 			{
@@ -46,7 +46,7 @@ int main(void)
 		else
 		{
 			
-		}*/
+		}
     }
 }
 
