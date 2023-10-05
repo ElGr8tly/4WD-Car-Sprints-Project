@@ -180,6 +180,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Debug\" />
+    <Folder Include="Debug\Debug\" />
+    <Folder Include="Debug\Debug\Include\" />
+    <Folder Include="Debug\Debug\Include\APP\" />
+    <Folder Include="Debug\Debug\Include\HAL\" />
+    <Folder Include="Debug\Debug\Include\HAL\button\" />
+    <Folder Include="Debug\Debug\Include\HAL\led\" />
+    <Folder Include="Debug\Debug\Include\HAL\motor_driver\" />
+    <Folder Include="Debug\Debug\Include\LIB\" />
+    <Folder Include="Debug\Debug\Include\MCAL\" />
+    <Folder Include="Debug\Debug\Include\MCAL\dio\" />
+    <Folder Include="Debug\Debug\Include\MCAL\exti\" />
+    <Folder Include="Debug\Debug\Include\MCAL\gie\" />
+    <Folder Include="Debug\Debug\Include\MCAL\timer\" />
+    <Folder Include="Debug\Debug\Src\" />
     <Folder Include="Debug\Include\" />
     <Folder Include="Debug\Include\APP\" />
     <Folder Include="Debug\Include\HAL\" />

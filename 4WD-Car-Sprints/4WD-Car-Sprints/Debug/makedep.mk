@@ -2,13 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+dio.c
+
 Include\APP\app.c
 
 Include\HAL\button\button.c
 
 Include\HAL\led\led.c
 
-Include\HAL\motor_driver\motor.c
+Include\HAL\motor_driver\motor_driver.c
 
 Include\MCAL\dio\dio.c
 
@@ -18,5 +20,5 @@ Include\MCAL\gie\gie.c
 
 Include\MCAL\timer\timer.c
 
-main.c
+Src\main.c
 
