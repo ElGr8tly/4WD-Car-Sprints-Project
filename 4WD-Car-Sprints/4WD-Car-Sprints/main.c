@@ -4,6 +4,8 @@
  * Created: 10/3/2023 2:00:33 PM
  * Author : melgreatly
  */ 
+
+//#include <avr/io.h>
 #include "Include/LIB/STD_TYPES.h"
 #include "Include/APP/app.h"
 
@@ -16,17 +18,21 @@ extern u8 u8_g_sequenceNumber;
 /************************************************************/
 int main(void)
 {
-	DIO_setPinDirection((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK});
-	DIO_setPinStatus((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK},DIO_HIGH);
-	/*st_leds led = {PORTC_INDEX,DIO_PIN7};
-	LED_init(&led);
+	//DIO_setPinDirection((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK});
+	//DIO_setPinStatus((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK},DIO_HIGH);
 	
-	LED_on(&led);
 	
-	APP_init();*/
+	//APP_init();
+	//MOTOR_stopMotorDirection();
+	//MOTOR_leftMotorForwardDirection();
+	//MOTOR_rightMotorBackwardDirection();	
+	//DIO_DDRA = 0xff;
+	//DIO_PORTA = 0x15;
+
     while (1) 
     {
-		if(en_g_carStatus == SYSTEM_ON)
+	
+		/*if(en_g_carStatus == SYSTEM_ON)
 		{
 			if(u8_g_halfSecondStop != 1)
 			{
@@ -40,7 +46,7 @@ int main(void)
 		else
 		{
 			
-		}
+		}*/
     }
 }
 

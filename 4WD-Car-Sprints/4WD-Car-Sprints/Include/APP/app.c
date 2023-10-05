@@ -38,7 +38,7 @@ st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 	}
 };
 
-st_pinConfig	st_g_pwmSignalPin	= {PORTA_INDEX,DIO_PIN4,DIO_DIRECTION_OUTPUT,DIO_LOW,DIO_UNLOCK};
+st_pinConfig	st_g_pwmSignalPin	= {PORTA_INDEX,DIO_PIN4,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK};
 st_button		st_g_startButton	= {PORTD_INDEX,DIO_PIN1};
 st_button		st_g_stopButton		= {PORTD_INDEX,DIO_PIN2};
 	
@@ -111,8 +111,13 @@ en_appErrorStatus APP_init()
 	en_appErrorStatus en_a_appErrorStatus = APP_OK;	
 	en_a_appErrorStatus |= DIO_setPinDirection(&st_g_pwmSignalPin);
 		
-	en_a_appErrorStatus |= BUTTON_init(&st_g_startButton);
-	en_a_appErrorStatus |= BUTTON_init(&st_g_stopButton);
+	//en_a_appErrorStatus |= BUTTON_init(&st_g_startButton);
+	//en_a_appErrorStatus |= BUTTON_init(&st_g_stopButton);
+	//en_a_appErrorStatus |= BUTTON_connectIPU(&st_g_startButton);
+	//en_a_appErrorStatus |= BUTTON_connectIPU(&st_g_stopButton);
+		
+	DIO_DDRD = 0;
+	DIO_PORTD = 0xff;
 		
 	en_a_appErrorStatus |= LED_init(&st_g_longSideLed);
 	en_a_appErrorStatus |= LED_init(&st_g_shortSideLed);
@@ -120,7 +125,7 @@ en_appErrorStatus APP_init()
 	en_a_appErrorStatus |= LED_init(&st_g_stopLed);
 
 
-	en_a_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
+	en_a_appErrorStatus |= EXTI_interruptInit(&st_g_startInterrupt);
 	en_a_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
 		
 	en_a_appErrorStatus |= TIMER_init();
@@ -130,6 +135,8 @@ en_appErrorStatus APP_init()
 		
 	en_a_appErrorStatus |= GIE_enableGeneralInterrupt();
 	en_a_appErrorStatus |= MOTOR_driverInitialize();
+	
+	
 		
 	return  en_a_appErrorStatus ;
 }
@@ -137,6 +144,10 @@ en_appErrorStatus APP_init()
 /*start button external interrupt Rooutine*/
 void APP_systemStart()
 {
+	st_leds led = {PORTC_INDEX,DIO_PIN0};
+	LED_init(&led);
+	
+	LED_on(&led);
 	if(en_g_carStatus == SYSTEM_OFF)
 	{
 		TIMER_start(TIMER_TM0);
@@ -212,6 +223,10 @@ en_appErrorStatus APP_temporaryStop()
 /*start button external interrupt Routine*/
 void APP_systemStop()
 {
+	/*st_leds led = {PORTC_INDEX,DIO_PIN0};
+	LED_init(&led);
+	
+	LED_on(&led);*/
 	en_appErrorStatus en_a_appErrorStatus = APP_OK;
 	TIMER_read(TIMER_TM1,&u16_g_timerLastValue);
 	TIMER_stop(TIMER_TM0);

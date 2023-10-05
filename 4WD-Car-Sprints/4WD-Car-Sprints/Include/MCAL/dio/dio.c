@@ -193,7 +193,7 @@ en_dioErrorStatus DIO_setPinStatus(st_pinConfig* st_a_pinConfig, en_bitLogic en_
 		if (st_a_pinConfig->u8_g_reserved == DIO_UNLOCK)
 		{
 
-			en_a_bitLogic &= 1;
+			en_a_bitLogic &= DIO_HIGH;
 
 			switch (st_a_pinConfig->u8_g_port)
 			{

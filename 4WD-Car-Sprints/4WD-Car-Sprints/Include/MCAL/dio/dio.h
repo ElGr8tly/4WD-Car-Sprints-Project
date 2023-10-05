@@ -45,8 +45,8 @@ typedef enum {
 }en_bitLock;
 
 typedef enum {
-    DIO_DIRECTION_OUTPUT = 0,
-    DIO_DIRECTION_INPUT
+    DIO_DIRECTION_INPUT = 0,
+    DIO_DIRECTION_OUTPUT
 }en_pinDirection;
 
 
