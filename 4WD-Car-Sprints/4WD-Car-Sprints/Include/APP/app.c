@@ -82,8 +82,8 @@ st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 			TIMER_preload(255 - u8_g_pwmDutyCycle,TIMER_TM0);
 			u8_a_flag = 1;
 			} else if(u8_a_flag == 1){
-			DIO_setPinStatus(&st_g_pwmSignalPin, DIO_HIGH);
-			TIMER_preload(255 - u8_g_pwmDutyCycle,TIMER_TM0);
+			DIO_setPinStatus(&st_g_pwmSignalPin, DIO_LOW);
+			TIMER_preload(u8_g_pwmDutyCycle,TIMER_TM0);
 			u8_a_flag = 0;
 		}
 		
