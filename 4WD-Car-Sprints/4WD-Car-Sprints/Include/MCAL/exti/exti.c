@@ -41,6 +41,7 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			else if (st_a_intObj->en_a_mode == INTERRUPT_FALLING_EDGE)
 			{
 				EXT_INT0_FallingEdgeSet();
+				
 			}
 			else
 			{
@@ -68,6 +69,7 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
 			else if (st_a_intObj->en_a_mode == INTERRUPT_FALLING_EDGE)
 			{
 				EXT_INT1_FallingEdgeSet();
+
 			}
 			else
 			{

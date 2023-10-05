@@ -30,7 +30,7 @@ st_pinConfig st_g_leftMotorDirectionControl [2] =
   ,
   { /*Pin D5*/
   .u8_g_port = MOTOR_PORT,
-  .u8_g_pin = MOTOR_PIN_1,
+  .u8_g_pin = MOTOR_PIN_2,
   .u8_g_direction = DIO_DIRECTION_OUTPUT,
   .u8_g_logic = DIO_HIGH,        /* Default logic when set output direction */
   .u8_g_reserved = DIO_UNLOCK
