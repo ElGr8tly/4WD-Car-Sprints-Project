@@ -8,7 +8,7 @@
 #include "Include/APP/app.h"
 extern en_systemStatus en_g_carStatus ;
 extern en_systemStatus u8_g_halfSecondStop ;
-extern u8_g_pwmDutyCycle = 231;
+u8 u8_g_pwmDutyCycle = 231;
 
 int main(void)
 {
