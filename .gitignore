@@ -53,3 +53,12 @@
 4WD-Car-Sprints/4WD-Car-Sprints/Debug/4WD-Car-Sprints.map
 4WD-Car-Sprints/.vs/4WD-Car-Sprints/v14/.atsuo
 4WD-Car-Sprints/4WD-Car-Sprints/Debug/Include/APP/app.o
+*.elf
+*.hex
+*.lss
+*.lss
+*.map
+*.srec
+*.o
+*.o
+*.o
