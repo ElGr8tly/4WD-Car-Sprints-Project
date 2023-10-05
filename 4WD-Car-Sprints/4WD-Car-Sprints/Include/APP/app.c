@@ -4,7 +4,10 @@
 * Created: 10/3/2023 2:11:11 PM
 *  Author:
 */
+/********************* INCLUDES SECTION ***********************/
 #include "app.h"
+
+/******************** GLOBAL VARIABLES DEFINETIONS *******************/
 
 en_systemStatus en_g_carStatus = SYSTEM_OFF;
 
@@ -12,8 +15,10 @@ u8 u8_g_sequenceNumber = 0;
 
 u8 u8_g_halfSecondStop = 0;
 
-extern u8 u8_g_pwmDutyCycle;
+u8 u8_g_pwmDutyCycle = 128;
 
+u16 u16_g_timerLastValue = 0;
+st_leds *st_g_currentLed ;
 st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 	{
 		.ptr_g_Function = APP_longestSide,
@@ -30,132 +35,192 @@ st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 	{
 		.ptr_g_Function = APP_rotate,
 		.period = ROTATE_PERIOD
-	}};
+	}
+};
 
-
-
-
-	st_pinConfig st_g_pwmSignalPin = {PORTA_INDEX,DIO_PIN4,DIO_DIRECTION_OUTPUT,DIO_LOW,0};
-
-	st_button st_g_startButton = {PORTD_INDEX,DIO_PIN1};
-	st_button st_g_stopButton = {PORTD_INDEX,DIO_PIN2};
-
-	st_leds	  st_g_longSideLed = {PORTB_INDEX,DIO_PIN0};
-	st_leds	  st_g_shortSideLed = {PORTB_INDEX,DIO_PIN1};
-	st_leds	  st_g_stopLed = {PORTB_INDEX,DIO_PIN2};
-	st_leds	  st_g_rotateLed = {PORTB_INDEX,DIO_PIN3};
+st_pinConfig	st_g_pwmSignalPin	= {PORTA_INDEX,DIO_PIN4,DIO_DIRECTION_OUTPUT,DIO_LOW,DIO_UNLOCK};
+st_button		st_g_startButton	= {PORTD_INDEX,DIO_PIN1};
+st_button		st_g_stopButton		= {PORTD_INDEX,DIO_PIN2};
 	
-
+st_leds			st_g_longSideLed	= {PORTB_INDEX,DIO_PIN0};
+st_leds			st_g_shortSideLed	= {PORTB_INDEX,DIO_PIN1};
+st_leds			st_g_stopLed		= {PORTB_INDEX,DIO_PIN2};
+st_leds			st_g_rotateLed		= {PORTB_INDEX,DIO_PIN3};
 	
-	interrupt_INTx_t st_g_startInterrupt;
-	interrupt_INTx_t st_g_stopInterrupt;
-	/*************************************************************************************/
-	void APP_overflowRoutine()
+interrupt_INTx_t st_g_startInterrupt =
+{
+	.en_a_mode				= INTERRUPT_FALLING_EDGE,
+	.en_a_source			= INTERRUPT_EXTERNAL_INT1,
+	.EXT_InterruptHandler	= APP_systemStart,	
+};
+interrupt_INTx_t st_g_stopInterrupt =
+{
+	.en_a_mode = INTERRUPT_FALLING_EDGE,
+	.en_a_source = INTERRUPT_EXTERNAL_INT0,
+	.EXT_InterruptHandler = APP_systemStop,	
+};
+
+/********************** FUNCTIONS DEFINITIONS ***************************************/
+
+void APP_overflowRoutine()
+{
+	static i8 i8_gs_overFlowCounter = 0;
+	TIMER_preload(3035,TIMER_TM1); 
+	if (en_g_carStatus == SYSTEM_ON)
 	{
-		static i8 i8_gs_overFlowCounter = 0;
-		if (en_g_carStatus == SYSTEM_ON)
-		{
-			i8_gs_overFlowCounter++;
-			if(st_g_systemSequence[u8_g_sequenceNumber].period == i8_gs_overFlowCounter)
-			{
-				i8_gs_overFlowCounter=-1;
-				u8_g_sequenceNumber = (u8_g_sequenceNumber + 1) % SEQUENCE_MAX_NUMBER;
-				u8_g_halfSecondStop = 1;
-			}
-			else
-			{
-				u8_g_halfSecondStop = 0;
-			}
-		}
-		else if(en_g_carStatus == START_PRESSED)
+		i8_gs_overFlowCounter++;
+		if(st_g_systemSequence[u8_g_sequenceNumber].period == i8_gs_overFlowCounter)
 		{
 			i8_gs_overFlowCounter=-1;
-			en_g_carStatus = SYSTEM_ON;
+			u8_g_sequenceNumber = (u8_g_sequenceNumber + 1) % SEQUENCE_MAX_NUMBER;
+			u8_g_halfSecondStop = 1;
+		}
+		else
+		{
+			u8_g_halfSecondStop = 0;
 		}
 	}
-	/*************************************************************************************/
-	void APP_pwmRoutine()
+	else if(en_g_carStatus == START_PRESSED)
 	{
-		static u8 u8_a_flag = 0;
-		if(u8_a_flag == 0){
-			DIO_setPinStatus(&st_g_pwmSignalPin, DIO_HIGH);
-			TIMER_preload(255 - u8_g_pwmDutyCycle,TIMER_TM0);
-			u8_a_flag = 1;
-			} else if(u8_a_flag == 1){
-			DIO_setPinStatus(&st_g_pwmSignalPin, DIO_LOW);
-			TIMER_preload(u8_g_pwmDutyCycle,TIMER_TM0);
-			u8_a_flag = 0;
-		}
-		
+		i8_gs_overFlowCounter=-1;
+		en_g_carStatus = SYSTEM_ON;
 	}
-	/*************************************************************************************/
-	//set pin A0..3 for motor directions
-	//set pin D1 D2 for external interrupts input signal
-	//set pin A4 for pwm signal output
-	//set pin B0..3 for leds
-
-	/************************************************/
-
-
-
-
-	
-
-	/**********************************************/
-	en_appErrorStatus APP_init()
-	{
-		en_appErrorStatus en_appErrorStatus = APP_OK;
-		st_g_startInterrupt.en_a_mode = INTERRUPT_FALLING_EDGE;
-		st_g_startInterrupt.en_a_source = INTERRUPT_EXTERNAL_INT1;
-		st_g_startInterrupt.EXT_InterruptHandler = APP_systemStart;
-		
-		en_appErrorStatus |= DIO_setPinDirection(&st_g_pwmSignalPin);
-		
-		en_appErrorStatus |= BUTTON_init(&st_g_startButton);
-		en_appErrorStatus |= BUTTON_init(&st_g_stopButton);
-		
-		en_appErrorStatus |= LED_init(&st_g_longSideLed);
-		en_appErrorStatus |= LED_init(&st_g_shortSideLed);
-		en_appErrorStatus |= LED_init(&st_g_rotateLed);
-		en_appErrorStatus |= LED_init(&st_g_stopLed);
-		
-		st_g_stopInterrupt.en_a_mode = INTERRUPT_FALLING_EDGE;
-		st_g_stopInterrupt.en_a_source = INTERRUPT_EXTERNAL_INT0;
-		st_g_stopInterrupt.EXT_InterruptHandler = APP_systemStop;
-
-		en_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
-		en_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
-		
-		en_appErrorStatus |= TIMER_init();
-		en_appErrorStatus |= TIMER_setCallBack(TIMER0_OVF,APP_pwmRoutine);
-		en_appErrorStatus |= TIMER_setCallBack(TIMER1_OVF,APP_overflowRoutine);
-		en_appErrorStatus |= TIMER_preload(231,TIMER_TM0);
-		
-		en_appErrorStatus |= GIE_enableGeneralInterrupt();
-		en_appErrorStatus |= MOTOR_DriverInitialize();
-		
-		return  en_appErrorStatus ;
+}
+/*************************************************************************************/
+/*timer0 ovf routine for generating pwm signals*/
+void APP_pwmRoutine()
+{
+	static u8 u8_a_flag = 0;
+	if(u8_a_flag == 0){
+		DIO_setPinStatus(&st_g_pwmSignalPin, DIO_HIGH);
+		TIMER_preload(255 - u8_g_pwmDutyCycle,TIMER_TM0);
+		u8_a_flag = 1;
+		} else if(u8_a_flag == 1){
+		DIO_setPinStatus(&st_g_pwmSignalPin, DIO_LOW);
+		TIMER_preload(u8_g_pwmDutyCycle,TIMER_TM0);
+		u8_a_flag = 0;
 	}
-	void APP_systemStart()
+		
+}
+/*************************************************************************************/
+
+
+/*initialize application function*/
+en_appErrorStatus APP_init()
+{
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;	
+	en_a_appErrorStatus |= DIO_setPinDirection(&st_g_pwmSignalPin);
+		
+	en_a_appErrorStatus |= BUTTON_init(&st_g_startButton);
+	en_a_appErrorStatus |= BUTTON_init(&st_g_stopButton);
+		
+	en_a_appErrorStatus |= LED_init(&st_g_longSideLed);
+	en_a_appErrorStatus |= LED_init(&st_g_shortSideLed);
+	en_a_appErrorStatus |= LED_init(&st_g_rotateLed);
+	en_a_appErrorStatus |= LED_init(&st_g_stopLed);
+
+
+	en_a_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
+	en_a_appErrorStatus |= EXTI_interruptInit(&st_g_stopInterrupt);
+		
+	en_a_appErrorStatus |= TIMER_init();
+	en_a_appErrorStatus |= TIMER_setCallBack(TIMER0_OVF,APP_pwmRoutine);
+	en_a_appErrorStatus |= TIMER_setCallBack(TIMER1_OVF,APP_overflowRoutine);
+	en_a_appErrorStatus |= TIMER_preload(231,TIMER_TM0);
+		
+	en_a_appErrorStatus |= GIE_enableGeneralInterrupt();
+	en_a_appErrorStatus |= MOTOR_driverInitialize();
+		
+	return  en_a_appErrorStatus ;
+}
+/******************************************************************************/
+/*start button external interrupt Rooutine*/
+void APP_systemStart()
+{
+	if(en_g_carStatus == SYSTEM_OFF)
 	{
-		/*write function*/
 		TIMER_start(TIMER_TM0);
 		TIMER_start(TIMER_TM1);
 		en_g_carStatus = START_PRESSED;
-		
+		TIMER_preload(TIMER_TM1,u16_g_timerLastValue);
 	}
-	en_appErrorStatus APP_longestSide()
+	else
 	{
+	}
 		
-	}
-	en_appErrorStatus APP_shortestSide();
-	en_appErrorStatus APP_rotate();
-	en_appErrorStatus APP_stop()
-	{
-		
-	}
-	void APP_systemStop()
-	{
-		/*write function*/
-		en_g_carStatus = SYSTEM_OFF;
-	}
+}
+/************************************************************************************/
+
+/***********************************************************************************/
+/*longest side of the rectangle*/
+en_appErrorStatus APP_longestSide()
+{
+	u8_g_pwmDutyCycle = 128;
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;
+	
+	en_a_appErrorStatus |= LED_off(st_g_currentLed);	
+	st_g_currentLed    = &st_g_longSideLed;
+	en_a_appErrorStatus |= LED_on(st_g_currentLed);
+	
+	en_a_appErrorStatus |= MOTOR_leftMotorForwardDirection();
+	en_a_appErrorStatus |= MOTOR_rightMotorForwardDirection();
+	return en_a_appErrorStatus ;
+}
+/*************************************************************************************/
+/*shortest side of the rectangle*/
+en_appErrorStatus APP_shortestSide()
+{
+	u8_g_pwmDutyCycle = 77;
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;
+	
+	en_a_appErrorStatus |= LED_off(st_g_currentLed);
+	st_g_currentLed    = &st_g_shortSideLed;
+	en_a_appErrorStatus |= LED_on(st_g_currentLed);
+	
+	en_a_appErrorStatus |= MOTOR_leftMotorForwardDirection();
+	en_a_appErrorStatus |= MOTOR_rightMotorForwardDirection();
+	return en_a_appErrorStatus ;
+}
+/*****************************************************************/
+/*rotate the robot*/
+en_appErrorStatus APP_rotate()
+{
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;
+	
+	en_a_appErrorStatus |= LED_off(st_g_currentLed);
+	st_g_currentLed    = &st_g_rotateLed;
+	en_a_appErrorStatus |= LED_on(st_g_currentLed);
+	
+	en_a_appErrorStatus |= MOTOR_leftMotorBackwardDirection();
+	en_a_appErrorStatus |= MOTOR_rightMotorForwardDirection();
+	return en_a_appErrorStatus;
+}
+/******************************************************************/
+/*stop car for half second*/
+en_appErrorStatus APP_temporaryStop()
+{
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;
+	
+	en_a_appErrorStatus |= LED_off(st_g_currentLed);
+	st_g_currentLed    = &st_g_stopLed;
+	en_a_appErrorStatus |= LED_on(st_g_currentLed);
+	
+	en_a_appErrorStatus |= MOTOR_stopMotorDirection();
+	return en_a_appErrorStatus;	
+}
+/********************************************************************/
+/*start button external interrupt Routine*/
+void APP_systemStop()
+{
+	en_appErrorStatus en_a_appErrorStatus = APP_OK;
+	TIMER_read(TIMER_TM1,&u16_g_timerLastValue);
+	TIMER_stop(TIMER_TM0);
+	TIMER_stop(TIMER_TM1);
+	MOTOR_stopMotorDirection();
+	en_g_carStatus = SYSTEM_OFF;
+	
+	en_a_appErrorStatus |= LED_off(st_g_currentLed);
+	st_g_currentLed    = &st_g_stopLed;
+	en_a_appErrorStatus |= LED_on(st_g_currentLed);
+}
+/***********************************************************************/
