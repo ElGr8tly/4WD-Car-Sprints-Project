@@ -2,11 +2,13 @@
  * button.h
  *
  *  Created on: Oct 04, 2023
- *      Author: Mahmoud Mahran
+ *      Author: msharfeldin
  *     Version: 0.1
  */
 #ifndef BUTTON_H
 #define BUTTON_H
+#define MAX_PORT_INDEX   3
+#define MAX_PIN_INDEX    7
 
 typedef enum en_buttonError{
 BUTTON_OK,
