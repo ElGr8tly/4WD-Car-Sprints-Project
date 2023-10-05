@@ -54,7 +54,7 @@ Discarded input sections
  .text.APP_systemStop
                 0x00000000        0x8 Include/APP/app.o
  .text.APP_pwmRoutine
-                0x00000000       0x5a Include/APP/app.o
+                0x00000000       0x50 Include/APP/app.o
  .text.APP_systemStart
                 0x00000000       0x14 Include/APP/app.o
  .text.APP_init
