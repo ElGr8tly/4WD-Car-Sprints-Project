@@ -14,7 +14,7 @@ en_ledError LED_init(st_leds *st_a_led)
 	en_ledError en_a_retFunction = LED_OK;
 	if(st_a_led->port < 4 && st_a_led->pin < 8){
 		st_pinConfig st_a_ledPin = {st_a_led->port, st_a_led->pin, DIO_DIRECTION_OUTPUT, DIO_LOW};
-		if (DIO_pinInit(&st_a_ledPin) == DIO_OK )
+		if (DIO_pinInitialize(&st_a_ledPin) == DIO_OK )
 		{
 			st_a_led->state = 0;
 			en_a_retFunction = LED_OK;
