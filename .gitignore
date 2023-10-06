@@ -62,3 +62,13 @@
 *.o
 *.o
 *.o
+4WD-Car-Sprints/.vs/4WD-Car-Sprints/v14/.atsuo
+*.elf
+*.hex
+*.lss
+*.map
+*.srec
+*.o
+*.o
+*.d
+*.o

@@ -1,6 +1,31 @@
+/*
+*****************************************************************************************************************
+    Author 		: Mahmoud Mahran
+    Version		: V:1.0
+	Date 		: 03/10/2023
+Description 	: timer.h --> Prototypes
+*****************************************************************************************************************
+
+What to sell for customer
+	1- the Architecture of the API
+	2- Name of the functions
+	3- The outputs
+	4- macros
+*/
+
+/*
+*************************************************************************************************************************
+*************************************************************************************************************************
+**************************************************File Guard*************************************************************
+*************************************************************************************************************************
+*/
+
 #ifndef TIMER_H
 #define TIMER_H
 
+/***************************************************/
+/**           TIMER INTERRUPT REGISTERS           **/
+/***************************************************/
 #define TIMSK              *( (volatile u8*)0x59)
 #define TOIE0              0
 #define OCIE0              1
@@ -61,48 +86,25 @@
 #define OCR1BL             *( (volatile u8*)0x48)
 #define ICR1H              *( (volatile u8*)0x47)
 #define ICR1L              *( (volatile u8*)0x46)
-/***************************************************/
-/**            TIMER2 REGISTERS                   **/
-/***************************************************/
-#define TCCR2              *( (volatile u8*)0x45)
-#define CS20               0
-#define CS21               1
-#define CS22               2
-#define WGM21              3
-#define COM20              4
-#define COM21              5
-#define WGM20              6
-#define FOC2               7
-#define TCNT2              *( (volatile u8*)0x44)
-#define OCR2               *( (volatile u8*)0x43)
-#define ASSR               *( (volatile u8*)0x42)
-#define TCR2UB             0
-#define OCR2UB             1
-#define TCN2UB             2
-#define AS2                3
-#ifndef SFIOR
-#define SFIOR              *( (volatile u8*)0x50)
-#endif
-#define PSR2               1
 ///////////////////////CONFIG MACROS/////////////////////////
 #define ENABLE                                           1
 #define DISABLE                                          0
-#define NO_PRE                                           1
-#define PRE_8                                            2
-#define PRE_64                                           3
-#define PRE_256                                          4
-#define PRE_1024                                         5
-#define EXT_FALLING                                      6
-#define EXT_RISING                                       7
+#define NO_PRE                                           1U
+#define PRE_8                                            2U
+#define PRE_64                                           3U
+#define PRE_256                                          4U
+#define PRE_1024                                         5U
+#define EXT_FALLING                                      6U
+#define EXT_RISING                                       7U
 #define NORMAL                                           0x00
 //TIMER0 macros
 #define CTC                                              0x08
 #define PWM_PHASE_CORRECT                                0x40
 #define FAST_PWM                                         0x48
-#define OC0_OFF                                          0
-#define TGL_OC0                                          1
-#define CLR_OC0                                          2
-#define SET_OC0                                          3
+#define OC0_OFF                                          0U
+#define TGL_OC0                                          1U
+#define CLR_OC0                                          2U
+#define SET_OC0                                          3U
 //TIMER1 macros
 #define PWM_PHASE_CORRECT_8_BIT                          0x01
 #define PWM_PHASE_CORRECT_9_BIT                          0x02
@@ -119,49 +121,27 @@
 #define FAST_PWM_ICR1_TOP                                0x0E
 #define FAST_PWM_OCR1A_TOP                               0x0F
 
-#define OC1_OFF                                          0
-#define TGL_OC1                                          1
-#define CLR_OC1                                          2
-#define SET_OC1                                          3
+#define OC1_OFF                                          0U
+#define TGL_OC1                                          1U
+#define CLR_OC1                                          2U
+#define SET_OC1                                          3U
 
+//TIMER interrupt vectors
+void __vector_9  (void) __attribute__ ((signal, used));                           //timer1 ovf
+void __vector_11 (void) __attribute__ ((signal, used));                           //timer0 ovf
 
-//TIMER2 macros
-#define TM2_PWM_PHASE_CORRECT                            0x40
-#define TM2_CTC                                          0x08
-#define TM2_FAST_PWM                                     0x48
-#define OC2_OFF                                          0
-#define TGL_OC2                                          1
-#define CLR_OC2                                          2
-#define SET_OC2                                          3
-
-#define TM2_PRE_32                                       3
-#define TM2_PRE_64                                       4
-#define TM2_PRE_128                                      5
-#define TM2_PRE_256                                      6
-#define TM2_PRE_1024                                     7
-
-
-//TIMER ISRS
-void __vector_4  (void) __attribute__ ((signal, used));
-void __vector_5  (void) __attribute__ ((signal, used));
-void __vector_6  (void) __attribute__ ((signal, used));
-void __vector_7  (void) __attribute__ ((signal, used));
-void __vector_8  (void) __attribute__ ((signal, used));
-void __vector_9  (void) __attribute__ ((signal, used));
-void __vector_10 (void) __attribute__ ((signal, used));
-void __vector_11 (void) __attribute__ ((signal, used));
-
+///////////////Define System CLK///////////////
 #ifndef F_CPU
 #define F_CPU         8000000UL
 #endif
 ///////////////Enable Or Disable Timers///////////////
 #define TIMER_0			    ENABLE
 #define TIMER_1			    ENABLE
-#define TIMER_2			    DISABLE
 
-/***************************************/
-/*************TIMER0 CONFIG*************/
-/***************************************/
+/******************************************************************************************/
+/*********************************TIMER0 CONFIG********************************************/
+/******************************************************************************************/
+
 ///////////////CHOOSE MODE OF OPERATION///////////////
 /* Timer/Counter Mode of Operation | TOP | Update of OCR0 | TOV0 Flag Set-on
 -----------------------------------|-----|----------------|-----------------
@@ -179,20 +159,6 @@ CLR_OC0: Clear OC0 on compare match
 SET_OC0: Set OC0 on compare match
 */
 #define TIMER_0_NORMAL       TGL_OC0
-///////////////CHOOSE FAST PWM MODE CONFIG////////////////
-/*options in Compare Output Mode, Fast PWM Mode
-OC0_OFF: Normal port operation, OC0 disconnected.
-CLR_OC0: Clear OC0 on compare match, set OC0 at BOTTOM, (non-inverting mode)
-SET_OC0: Set OC0 on compare match, clear OC0 at BOTTOM, (inverting mode)
-*/
-#define TIMER_0_FAST_PWM     CLR_OC0
-///////////////CHOOSE Phase Correct PWM MODE CONFIG////////////////
-/*options in Compare Output Mode,  Phase Correct PWM Mode
-OC0_OFF: Normal port operation, OC0 disconnected.
-CLR_OC0: Clear OC0 on compare match when up-counting. Set OC0 on compare match when downcounting.
-SET_OC0: Set OC0 on compare match when up-counting. Clear OC0 on compare match when downcounting.
-*/
-#define TIMER_0_PHASE_PWM    CLR_OC0
 ///////////////CHOOSE TIMER0 CLOCK SOURCE///////////////
 /*options   :
 NO_PRE      : F_CPU (No prescaling)
@@ -207,9 +173,9 @@ EXT_RISING  : External clock source on T0 pin. Clock on rising edge.
 ///////////////ENABLE TIMER0 INTERRUPTS///////////////
 #define TIMER_0_OC_INTERRUPT  DISABLE
 #define TIMER_0_OVF_INTERRUPT ENABLE
-/***************************************/
-/*************TIMER1 CONFIG*************/
-/***************************************/
+/******************************************************************************************/
+/*********************************TIMER1 CONFIG********************************************/
+/******************************************************************************************/
 ///////////////CHOOSE MODE OF OPERATION///////////////
 /* Timer/Counter Mode of Operation |  TOP  | Update of OCR1x | TOV1 Flag Set-on
 -----------------------------------|-------|-----------------|-----------------
@@ -239,33 +205,6 @@ SET_OC1: Set OC1A/OC1B on compare match (Set output to high level)
 */
 #define TIMER_1_NORMAL_A     TGL_OC1
 #define TIMER_1_NORMAL_B     TGL_OC1
-///////////////CHOOSE FAST PWM MODE CONFIG FOR CH A & CH B////////////////
-/*options in Compare Output Mode, Fast PWM Mode
-OC1_OFF: Normal port operation, OC1A/OC1B disconnected.
-TGL_OC1: FAST_PWM_OCR1A_TOP Mode: Toggle OC1A on Compare Match, OC1B disconnected (normal port operation).
-         For all other Modes, normal port operation, OC1A/OC1B disconnected.
-CLR_OC1: Clear OC1A/OC1B on compare match when up-counting. Set OC1A/OC1B on compare match when down-counting.
-SET_OC1: Set OC1A/OC1B on compare match when up-counting. Clear OC1A/OC1B on compare match when down-counting.
-*/
-#define TIMER_1_FAST_PWM_A    CLR_OC1
-#define TIMER_1_FAST_PWM_B    CLR_OC1
-///////////////CHOOSE Phase Correct PWM and Phase and Frequency Correct PWM MODE CONFIG FOR CH A & CH B////////////////
-/*options in Compare Output Mode,  Phase Correct PWM Mode
-OC1_OFF:  Normal port operation, OC1A/OC1B disconnected.
-TGL_OC1: -PWM_PHASE_FREQ_CORRECT_OCR1A_TOP & FAST_PWM_ICR1_TOP Modes:
-            Toggle OC1A on Compare Match, OC1B disconnected (normal port operation).
-         -For all other Modes, normal port operation, OC1A/OC1B disconnected.
-CLR_OC1: Clear OC1A/OC1B on compare match when up-counting. Set OC1A/OC1B on compare match when down-counting.
-SET_OC1: Set OC1A/OC1B on compare match when up-counting. Clear OC1A/OC1B on compare match when down-counting.
-*/
-#define TIMER_1_PHASE_PWM_A   TGL_OC1
-#define TIMER_1_PHASE_PWM_B   TGL_OC1
-///////////////Enable OR Disable Input Capture Noise Canceler///////////////
-//options: { ENABLE, DISABLE }
-#define ICNC                  DISABLE
-///////////////Choose Falling OR Rising Edge For Input Capture//////////////
-//options: { TIMER_1_IC_FALLING, TIMER_1_IC_RISING }
-#define IC_EDGE               TIMER_1_IC_FALLING
 ///////////////CHOOSE TIMER1 CLOCK SOURCE///////////////
 /*options   :
 NO_PRE      : F_CPU (No prescaling)
@@ -282,76 +221,13 @@ EXT_RISING  : External clock source on T1 pin. Clock on rising edge.
 #define TIMER_1_OCA_INTERRUPT DISABLE
 #define TIMER_1_OCB_INTERRUPT DISABLE
 #define TIMER_1_OVF_INTERRUPT ENABLE
-/***************************************/
-/*************TIMER2 CONFIG*************/
-/***************************************/
-///////////////CHOOSE MODE OF OPERATION///////////////
-/* Timer/Counter Mode of Operation | TOP | Update of OCR0 | TOV0 Flag Set-on
------------------------------------|-----|----------------|-----------------
-           TM2_NORMAL              |0xFF |    Immediate   |      MAX
-           TM2_PWM_PHASE_CORRECT   |0xFF |       TOP      |     BOTTOM
-           TM2_CTC                 |OCR2 |    Immediate   |      MAX
-           TM2_FAST_PWM            |0xFF |     BOTTOM     |      MAX
-*/
-#define TIMER_2_MODE         TM2_FAST_PWM
-///////////////CHOOSE NORMAL/CTC MODE CONFIG///////////////
-/*options in Compare Output Mode, non-PWM Mode
-OC2_OFF: Normal port operation, OC2 disconnected.
-TGL_OC2: Toggle OC2 on compare match
-CLR_OC2: Clear OC2 on compare match
-SET_OC2: Set OC2 on compare match
-*/
-#define TIMER_2_NORMAL       TGL_OC2
-///////////////CHOOSE FAST PWM MODE CONFIG////////////////
-/*options in Compare Output Mode, Fast PWM Mode
-OC2_OFF: Normal port operation, OC2 disconnected.
-CLR_OC2: Clear OC2 on compare match, set OC0 at BOTTOM, (non-inverting mode)
-SET_OC2: Set OC2 on compare match, clear OC0 at BOTTOM, (inverting mode)
-*/
-#define TIMER_2_FAST_PWM     CLR_OC2
-///////////////CHOOSE Phase Correct PWM MODE CONFIG////////////////
-/*options in Compare Output Mode,  Phase Correct PWM Mode
-OC2_OFF: Normal port operation, OC2 disconnected.
-CLR_OC2: Clear OC2 on compare match when up-counting. Set OC2 on compare match when down-counting.
-SET_OC2: Set OC2 on compare match when up-counting. Clear OC0 on compare match when down-counting.
-*/
-#define TIMER_2_PHASE_PWM    CLR_OC2
-///////////////CHOOSE TIMER0 CLOCK SOURCE///////////////
-/*options       :
-NO_PRE          : F_CPU (No prescaling)
-PRE_8           : F_CPU / 8 (From prescaler)
-TM2_PRE_32      : F_CPU / 32 (From prescaler)
-TM2_PRE_64      : F_CPU / 64 (From prescaler)
-TM2_PRE_128     : F_CPU / 128 (From prescaler)
-TM2_PRE_256     : F_CPU / 256 (From prescaler)
-TM2_PRE_1024    : F_CPU / 1024 (From prescaler)
-*/
-#define TIMER_2_CLK           TM2_PRE_1024
-///////////////ENABLE TIMER2 INTERRUPTS///////////////
-#define TIMER_2_OC_INTERRUPT  DISABLE
-#define TIMER_2_OVF_INTERRUPT DISABLE
-
 
 //driver interfacing macros
 #define    TIMER_TM0			0
 #define    TIMER_TM1			1
-#define    TIMER_TM2			2
-
-#define    TIMER_TM1_ICR	    3
-#define    TIMER_TM1_CH_A       4
-#define    TIMER_TM1_CH_B	    5
-
-#define    TIMER_1_IC_FALLING   0
-#define    TIMER_1_IC_RISING    1
 //TIMERS INTERRUPTS
-#define    TIMER2_COMP          0
-#define    TIMER2_OVF           1
-#define    TIMER1_CAPT          2
-#define    TIMER1_COMPA         3
-#define    TIMER1_COMPB         4
-#define    TIMER1_OVF           5
-#define    TIMER0_COMP          6
-#define    TIMER0_OVF           7
+#define    TIMER1_OVF           0
+#define    TIMER0_OVF           1
 typedef enum en_timerError{
 	TIMER_OK,
 	TIMER_WRONG_INPUT,
@@ -393,63 +269,10 @@ en_timerError TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue);
  * **/
 en_timerError TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber);
 /***
- * Loads a specific TIMER value(compare register) based on input, returns void
- * INPUT:(u16) load value , (u8) Timer to load
- * OUTPUT: void
- * Returns: void
- * **/
-en_timerError TIMER_load(u16 u16_a_value, u8 u8_a_timerNumber);
-/***
- * Generates a non-pwm signal from a specific TIMER based on input, returns void
- * INPUT: (u8) Timer to generate signal from
- * OUTPUT: void
- * Returns: void
- * **/
-en_timerError TIMER_generateNonPwmSignal(u8 u8_a_timerNumber);
-/***
- * Generates a fast pwm signal from a specific TIMER based on input, returns void
- * INPUT: (u8) Timer to generate signal from
- * OUTPUT: void
- * Returns: void
- * **/
-en_timerError TIMER_generateFastPwmSignal(u8 u8_a_timerNumber);
-/***
- * Generates a phase correct pwm signal from a specific TIMER based on input, returns void
- * INPUT: (u8) Timer to generate signal from
- * OUTPUT: void
- * Returns: void
- * **/
-en_timerError TIMER_generatePhasePwmSignal(u8 u8_a_timerNumber);
-/***
- * Specifies the working edge of timer1's input capture unit, returns void
- * INPUT: (u8) Wanted edge
- * OUTPUT: void
- * Returns: void
- * **/
-en_timerError TIMER_setICUEdge(u8 u8_a_icEDGE);
-/***
- * Reads the value of timer1's input capture unit, returns void
- * INPUT: (u16*) Pointer to store the read value
- * OUTPUT: (u16) captured value
- * Returns: void
- * **/
-en_timerError TIMER_getICU(u16 *u16_a_value);
-/***
  * Sets the callback function for the input timer interrupt, returns void
  * INPUT: (u8) timer interrupt name, (*ptr) call back function
  * OUTPUT: void
  * Returns: void
  * **/
 en_timerError TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void));
-/***
- * Reads the value of the input frequency & pulse width from the ICU, returns void
- * INPUT: (u16*) Pointer to store frequency, (u16*) Pointer to store pulse width
- * OUTPUT: (u16) signal frequency, (u16) signal TimeOn
- * Returns: void
- * **/
-en_timerError TIMER_measureSignal(u32 *u16_a_frequency, u32 *u16_a_timeOn);
-
-
-
-
 #endif /* TIMER_H_ */
