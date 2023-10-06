@@ -262,10 +262,17 @@ en_timerError TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void)
 
 /****************************************************************************************************/
 //TIMER interrupt vectors(ISR Handlers)
+
+
+/*        timer1 overflow            */
+void __vector_9  (void) __attribute__ ((signal, used));                           
 void __vector_9(void) {
 	if (v_g_callbackFunc[TIMER1_OVF] != NULL)
 	v_g_callbackFunc[TIMER1_OVF]();
 }
+
+/*        timer0 overflow            */
+void __vector_11 (void) __attribute__ ((signal, used));                           
 void __vector_11(void) {
 	if (v_g_callbackFunc[TIMER0_OVF] != NULL)
 	v_g_callbackFunc[TIMER0_OVF]();

@@ -126,9 +126,7 @@ What to sell for customer
 #define CLR_OC1                                          2U
 #define SET_OC1                                          3U
 
-//TIMER interrupt vectors
-void __vector_9  (void) __attribute__ ((signal, used));                           //timer1 ovf
-void __vector_11 (void) __attribute__ ((signal, used));                           //timer0 ovf
+
 
 ///////////////Define System CLK///////////////
 #ifndef F_CPU
