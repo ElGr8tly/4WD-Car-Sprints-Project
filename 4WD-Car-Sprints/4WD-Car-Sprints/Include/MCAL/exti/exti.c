@@ -28,7 +28,7 @@ static void (*v_gs_ptrfuncInt1)(void) = NULL ;
 /* mode     : FALLING_EDGE, RISING_EDGE, LOW_LEVEL, LOGICAL_CHANGE           */
 /* source   : INT0, INT1, INT2        						               */
 /*****************************************************************************/
-en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
+en_extiErrorStatus EXTI_interruptInit(const st_exti *st_a_intObj)
 {
 	en_extiErrorStatus u8_a_retFunction = EXTI_OK;
 	if (st_a_intObj == NULL) 
@@ -122,7 +122,7 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj)
   /* source   : INT0, INT1, INT2        						                */
   /******************************************************************************/
   
-en_extiErrorStatus EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj)
+en_extiErrorStatus EXTI_interruptDeInit(const st_exti *st_a_intObj)
 {
 	en_extiErrorStatus u8_a_retFunction = EXTI_OK;
 	if (st_a_intObj == NULL)
