@@ -10,58 +10,76 @@
 #define APP_H_
 
 /********************* INCLUDES SECTION ***********************/
+
+// Standard library includes
 #include "../LIB/STD_TYPES.h"
 #include "../LIB/BIT_MATH.h"
+
+// Microcontroller Abstraction Layer (MCAL) includes
 #include "../MCAL/dio/dio.h"
 #include "../MCAL/exti/exti.h"
 #include "../MCAL/gie/gie.h"
 #include "../MCAL/timer/timer.h"
+
+// Hardware Abstraction Layer (HAL) includes
 #include "../HAL/button/button.h"
 #include "../HAL/led/led.h"
 #include "../HAL/motor_driver/motor.h"
 
-/***********************  MACROS DEFINITIONS ***********************/
-#define SHORTEST_SIDE_PERIOD	4 /*  2 sec */
-#define LONGEST_SIDE_PERIOD		6 /*  3 sec */
-#define ROTATE_PERIOD			2 /*  1 sec */
-#define SEQUENCE_MAX_NUMBER		4 /*  Array size */
+/*********************** MACROS DEFINITIONS ***********************/
+
+// Time periods for various robot actions (in seconds)
+#define SHORTEST_SIDE_PERIOD	4 /* 2 seconds */
+#define LONGEST_SIDE_PERIOD	6 /* 3 seconds */
+#define ROTATE_PERIOD		2 /* 1 second */
+#define SEQUENCE_MAX_NUMBER	4 /* Array size */
 
 /*********************** USER TYPES DEFINITION ***********************/
 
+// Custom error status enumeration for the application
 typedef enum {
-	APP_OK = 0,
-	APP_NOK,
-	APP_WRONG_INPUT,
+	APP_OK = 0,            // Operation successful
+	APP_NOK,               // Operation failed
+	APP_WRONG_INPUT,       // Incorrect input or configuration
 	
-}en_appErrorStatus;
+} en_appErrorStatus;
 
-typedef struct
-{
-	en_appErrorStatus (* ptr_g_Function)(void);
-	u8 period;
+// Structure to define the behavior of different robot modes
+typedef struct {
+	en_appErrorStatus (*ptr_g_Function)(void); // Pointer to a function for the mode
+	u8 period;                                  // Time period for the mode (in seconds)
 	
-}st_carMode;
+} st_carMode;
 
-typedef enum 
-{
-	SYSTEM_ON = 0,
-	SYSTEM_OFF,
-	START_PRESSED,
+// Enumeration to represent the system status
+typedef enum {
+	SYSTEM_ON = 0,     // System is ON
+	SYSTEM_OFF,        // System is OFF
+	START_PRESSED,     // Start button is pressed
 	
-}en_systemStatus;
-
+} en_systemStatus;
 
 /********************* FUNCTIONS PROTOTYPES  **********************/
+
+// Initialize the application and all necessary hardware components
 en_appErrorStatus APP_init();
+
+// Start the robot system
 void APP_systemStart();
+
+// Stop the robot system
 void APP_systemStop();
+
+// Overflow interrupt routine
 void APP_overflowRoutine();
+
+// PWM interrupt routine
 void APP_pwmRoutine();
+
+// Functions for different robot modes
 en_appErrorStatus APP_longestSide();
 en_appErrorStatus APP_shortestSide();
 en_appErrorStatus APP_rotate();
 en_appErrorStatus APP_temporaryStop();
-
-
 
 #endif /* APP_H_ */

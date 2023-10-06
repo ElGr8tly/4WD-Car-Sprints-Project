@@ -2,12 +2,21 @@
  * gie.c
  *
  * Created: 10/3/2023 2:09:36 PM
- *  Author: melgreatly
+ *  Author: msharfeldin
  */ 
-/***************************** includes section *************************************************/
+/***************************** INCLUDE SECTION *************************************************/
 #include "../../LIB/STD_TYPES.h"
 #include "../../LIB/BIT_MATH.h"
 #include "gie.h"
+
+
+/************************** FUNCTIONS DEFINETIONS ************************/
+
+/******************************************************************************/
+/* Function: GIE_enableGeneralInterrupt    @written by: Mahmoud Sharf-Eldin   */
+/* Returns: en_gieErrorStatus				                                  */
+/* Description: This Function enable global interrupts                        */
+/******************************************************************************/
 
 en_gieErrorStatus GIE_enableGeneralInterrupt(void)
 {
@@ -16,6 +25,12 @@ en_gieErrorStatus GIE_enableGeneralInterrupt(void)
 	return u8_a_retFunction;
 	
 }
+
+/******************************************************************************/
+/* Function: GIE_disableGeneralInterrupt    @written by: Mahmoud Sharf-Eldin  */
+/* Returns: en_gieErrorStatus				                                  */
+/* Description: This Function disable global interrupts                       */
+/******************************************************************************/
 
 en_gieErrorStatus GIE_disableGeneralInterrupt(void)
 {
