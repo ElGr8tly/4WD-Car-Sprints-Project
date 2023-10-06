@@ -141,7 +141,7 @@ en_appErrorStatus APP_init()
 	return  en_a_appErrorStatus ;
 }
 /******************************************************************************/
-/*start button external interrupt Rooutine*/
+/*start button external interrupt Routine*/
 void APP_systemStart()
 {
 	st_leds led = {PORTC_INDEX,DIO_PIN0};
@@ -150,10 +150,10 @@ void APP_systemStart()
 	LED_on(&led);
 	if(en_g_carStatus == SYSTEM_OFF)
 	{
+		TIMER_preload(u16_g_timerLastValue, TIMER_TM1);
 		TIMER_start(TIMER_TM0);
 		TIMER_start(TIMER_TM1);
 		en_g_carStatus = START_PRESSED;
-		TIMER_preload(TIMER_TM1,u16_g_timerLastValue);
 	}
 	else
 	{

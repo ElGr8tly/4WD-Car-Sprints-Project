@@ -1,13 +1,13 @@
 /*
- * 4WD-Car-Sprints.c
+ * 4wd-car-sprints.c
  *
- * Created: 10/3/2023 2:00:33 PM
- * Author : melgreatly
+ * created: 10/3/2023 2:00:33 pm
+ * author : melgreatly
  */ 
 
 //#include <avr/io.h>
-#include "Include/LIB/STD_TYPES.h"
-#include "Include/APP/app.h"
+#include "include/lib/std_types.h"
+#include "include/app/app.h"
 
 /*global variables*/
 extern en_systemStatus en_g_carStatus ;
@@ -18,16 +18,16 @@ extern u8 u8_g_sequenceNumber;
 /************************************************************/
 int main(void)
 {
-	//DIO_setPinDirection((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK});
-	//DIO_setPinStatus((st_pinConfig*){PORTC_INDEX,DIO_PIN7,DIO_DIRECTION_OUTPUT,DIO_HIGH,DIO_UNLOCK},DIO_HIGH);
+	//dio_setpindirection((st_pinconfig*){portc_index,dio_pin7,dio_direction_output,dio_high,dio_unlock});
+	//dio_setpinstatus((st_pinconfig*){portc_index,dio_pin7,dio_direction_output,dio_high,dio_unlock},dio_high);
 	
 	
 	APP_init();
-	//MOTOR_stopMotorDirection();
-	//MOTOR_leftMotorForwardDirection();
-	//MOTOR_rightMotorBackwardDirection();	
-	//DIO_DDRA = 0xff;
-	//DIO_PORTA = 0x15;
+	//motor_stopmotordirection();
+	//motor_leftmotorforwarddirection();
+	//motor_rightmotorbackwarddirection();	
+	//dio_ddra = 0xff;
+	//dio_porta = 0x15;
 
     while (1) 
     {
