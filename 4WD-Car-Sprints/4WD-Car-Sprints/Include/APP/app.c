@@ -55,14 +55,14 @@ st_leds st_g_stopLed = {PORTB_INDEX, DIO_PIN2};
 st_leds st_g_rotateLed = {PORTB_INDEX, DIO_PIN3};
 
 // Interrupt configuration for the start button (External Interrupt 1)
-interrupt_INTx_t st_g_startInterrupt = {
+st_exti st_g_startInterrupt = {
 	.en_a_mode = INTERRUPT_FALLING_EDGE,
 	.en_a_source = INTERRUPT_EXTERNAL_INT1,
 	.EXT_InterruptHandler = APP_systemStart,
 };
 
 // Interrupt configuration for the stop button (External Interrupt 0)
-interrupt_INTx_t st_g_stopInterrupt = {
+st_exti st_g_stopInterrupt = {
 	.en_a_mode = INTERRUPT_FALLING_EDGE,
 	.en_a_source = INTERRUPT_EXTERNAL_INT0,
 	.EXT_InterruptHandler = APP_systemStop,

@@ -101,21 +101,21 @@ typedef enum{
 	INTERRUPT_LOGICAL_CHANGE   ,
 	INTERRUPT_FALLING_EDGE ,
 	INTERRUPT_RISING_EDGE
-}interrupt_INTx_mode;
+}en_extiMode;
 
 //ENUM to represent the source of the external interrupt
 typedef enum{
 	INTERRUPT_EXTERNAL_INT0 =  0,
 	INTERRUPT_EXTERNAL_INT1,
 	INTERRUPT_EXTERNAL_INT2
-}interrupt_INTx_src;
+}en_extiSource;
 
 //Structure to hold all data of  the external interrupt
 typedef struct{
 	void (* EXT_InterruptHandler)(void);
-	interrupt_INTx_mode en_a_mode;
-	interrupt_INTx_src en_a_source;
-}interrupt_INTx_t;
+	en_extiMode en_a_mode;
+	en_extiSource en_a_source;
+}st_exti;
 
 //ENUM for errors of the module
 typedef enum {
@@ -140,7 +140,7 @@ typedef enum {
   /* source   : INT0, INT1, INT2        						               */
   /*****************************************************************************/
   
-en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj);
+en_extiErrorStatus EXTI_interruptInit(const st_exti *st_a_intObj);
 
   /******************************************************************************/
   /* Function: EXTI_interruptDeInit    @written by: Mahmoud Sharf-Eldin         */
@@ -154,6 +154,6 @@ en_extiErrorStatus EXTI_interruptInit(const interrupt_INTx_t *st_a_intObj);
   /* source   : INT0, INT1, INT2        						                */
   /******************************************************************************/
 
-en_extiErrorStatus EXTI_interruptDeInit(const interrupt_INTx_t *st_a_intObj);
+en_extiErrorStatus EXTI_interruptDeInit(const st_exti *st_a_intObj);
 
 #endif /* EXTI_H_ */
