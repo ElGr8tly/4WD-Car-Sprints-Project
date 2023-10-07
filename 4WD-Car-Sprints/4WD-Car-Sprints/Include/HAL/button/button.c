@@ -30,17 +30,20 @@
 
 en_buttonError BUTTON_init(st_button *st_a_butt){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	if(st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX){
+	if(st_a_butt != NULL && st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX)
+	{
 		st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_LOW,DIO_UNLOCK};
 		if(DIO_pinInitialize(&st_a_buttonPin) == DIO_OK)
 		{
 			en_a_retFunction = BUTTON_OK;
 		} 
-		else {
+		else 
+		{
 			en_a_retFunction = BUTTON_OP_FAILED;
 		}
 	} 
-	else {
+	else 
+	{
 		en_a_retFunction = BUTTON_WRONG_INPUT;
 	}
 	return en_a_retFunction;
@@ -58,14 +61,20 @@ en_buttonError BUTTON_init(st_button *st_a_butt){
 /*****************************************************************************/
 en_buttonError BUTTON_getValue(st_button *st_a_butt, en_bitLogic *en_a_buttonValue){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	if(st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX ){
+	if(st_a_butt != NULL && en_a_buttonValue != NULL && st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX )
+	{
 		st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_LOW};
-		if(DIO_getPinStatus(&st_a_buttonPin, en_a_buttonValue) == DIO_OK){
+		if(DIO_getPinStatus(&st_a_buttonPin, en_a_buttonValue) == DIO_OK)
+		{
 			en_a_retFunction = BUTTON_OK;
-			} else {
+		} 
+		else 
+		{
 			en_a_retFunction = BUTTON_OP_FAILED;
 		}
-		} else {
+	}
+	else 
+	{
 		en_a_retFunction = BUTTON_WRONG_INPUT;
 	}
 	return en_a_retFunction;
@@ -86,14 +95,20 @@ en_buttonError BUTTON_getValue(st_button *st_a_butt, en_bitLogic *en_a_buttonVal
 
 en_buttonError BUTTON_connectIPU(st_button *st_a_butt){
 	en_buttonError en_a_retFunction = BUTTON_OK;
-	if(st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX ){
+	if(st_a_butt != NULL && st_a_butt->port <= MAX_PORT_INDEX && st_a_butt->pin <= MAX_PIN_INDEX )
+	{
 		st_pinConfig st_a_buttonPin = {st_a_butt->port, st_a_butt->pin, DIO_DIRECTION_INPUT, DIO_HIGH,DIO_UNLOCK};
-		if(DIO_setPinStatus(&st_a_buttonPin, DIO_HIGH) == DIO_OK){
+		if(DIO_setPinStatus(&st_a_buttonPin, DIO_HIGH) == DIO_OK)
+		{
 			en_a_retFunction = BUTTON_OK;
-			} else {
+		}
+		else 
+		{
 			en_a_retFunction = BUTTON_OP_FAILED;
 		}
-		} else {
+	} 
+	else 
+	{
 		en_a_retFunction = BUTTON_WRONG_INPUT;
 	}
 	return en_a_retFunction;
