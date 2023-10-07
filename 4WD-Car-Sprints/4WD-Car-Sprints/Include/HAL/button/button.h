@@ -7,8 +7,15 @@
  */
 #ifndef BUTTON_H
 #define BUTTON_H
+
+
+/****************************** MACROS DEFINITION SECTION ****************************/
+
 #define MAX_PORT_INDEX   3
 #define MAX_PIN_INDEX    7
+
+/************************** USER DEFINED PROTOTYPES SECTION ************************/
+
 
 typedef enum en_buttonError{
 BUTTON_OK,
@@ -21,8 +28,49 @@ typedef struct st_button{
 	u8 pin;
 }st_button;
 
+/************************** FUNCTION DECLARATION ************************/
+
+/*****************************************************************************/
+/* Function: BUTTON_init    @written by: Mahmoud Sharf-Eldin				 */
+/* I/P Parameters: st_button pointer										 */
+/* Returns: en_buttonError				                                     */
+/* Description: This Function initialize a pin to connect button on it       */
+/*****************************************************************************/
+/* Options														             */
+/*****************************************************************************/
+/* port     : PORTA....PORTD                                                 */
+/* pin      : PIN0....PIN7        						                     */
+/*****************************************************************************/
+
 en_buttonError BUTTON_init(st_button *st_a_butt);
+
+/*****************************************************************************/
+/* Function: BUTTON_getValue    @written by: Mahmoud Sharf-Eldin			 */
+/* I/P Parameters: st_button pointer, u8 *u8_a_buttonValue					 */
+/* Returns: en_buttonError				                                     */
+/* Description: This Function get value of connected button                  */
+/*****************************************************************************/
+/* Options														             */
+/*****************************************************************************/
+/* port     : PORTA....PORTD                                                 */
+/* pin      : PIN0....PIN7        						                     */
+/*****************************************************************************/
+
 en_buttonError BUTTON_getValue(st_button *st_a_butt, u8 *u8_a_buttonValue);
+
+/*****************************************************************************/
+/* Function: BUTTON_connectIPU    @written by: Mahmoud Sharf-Eldin			 */
+/* I/P Parameters: st_button pointer                     					 */
+/* Returns: en_buttonError				                                     */
+/* Description: This Function configure a pin to be connected to internal    */
+/* pull-up resistor.                                                         */
+/*****************************************************************************/
+/* Options														             */
+/*****************************************************************************/
+/* port     : PORTA....PORTD                                                 */
+/* pin      : PIN0....PIN7        						                     */
+/*****************************************************************************/
+
 en_buttonError BUTTON_connectIPU(st_button *st_a_butt);
 
 #endif
