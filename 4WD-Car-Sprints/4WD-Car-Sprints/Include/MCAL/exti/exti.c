@@ -10,24 +10,25 @@
 #include "../../LIB/BIT_MATH.h"
 #include "../gie/gie.h"
 #include "exti.h"
-// STATIC GLOBAL POINTERS TO FUNCTIONS TO HOLD THE CALLBACK POINTERS
+/****************** GLOBAL VARIABLES SECTION *****************************/
+
 static void (*v_gs_ptrfuncInt0)(void) = NULL ;
 static void (*v_gs_ptrfuncInt1)(void) = NULL ;
 
 
-/************************** FUNCTION DEFINETION ********************************/
+/************************* FUNCTIONS DEFINEITIONS SECTION *****************************/
 
-/******************************************************************************/
-/* Function: EXTI_interruptInit    @written by: Mahmoud Sharf-Eldin           */
-/* I/P Parameters: interrupt_INTx_t										   */
+/*******************************************************************************/
+/* Function: EXTI_interruptInit    @written by: Mahmoud Sharf-Eldin            */
+/* I/P Parameters: st_exti pointer  										   */
 /* Returns: en_extiErrorStatus				                                   */
-/* Description: This Function initialize a given external interrupt           */
-/******************************************************************************/
-/* Options														           */
-/*****************************************************************************/
-/* mode     : FALLING_EDGE, RISING_EDGE, LOW_LEVEL, LOGICAL_CHANGE           */
-/* source   : INT0, INT1, INT2        						               */
-/*****************************************************************************/
+/* Description: This Function initialize a given external interrupt            */
+/*******************************************************************************/
+/* Options														               */
+/*******************************************************************************/
+/* mode     : FALLING_EDGE, RISING_EDGE, LOW_LEVEL, LOGICAL_CHANGE             */
+/* source   : INT0, INT1, INT2        						                   */
+/*******************************************************************************/
 en_extiErrorStatus EXTI_interruptInit(const st_exti *st_a_intObj)
 {
 	en_extiErrorStatus u8_a_retFunction = EXTI_OK;
@@ -112,7 +113,7 @@ en_extiErrorStatus EXTI_interruptInit(const st_exti *st_a_intObj)
 
   /******************************************************************************/
   /* Function: EXTI_interruptDeInit    @written by: Mahmoud Sharf-Eldin         */
-  /* I/P Parameters: interrupt_INTx_t										    */
+  /* I/P Parameters: st_exti pointer										    */
   /* Returns: en_extiErrorStatus				                                */
   /* Description: This Function de-initialize a given external interrupt        */
   /******************************************************************************/

@@ -128,23 +128,23 @@ typedef enum {
 
 /************************** FUNCTION DECLARATION ************************/
 
- /******************************************************************************/
- /* Function: EXTI_interruptInit    @written by: Mahmoud Sharf-Eldin           */
- /* I/P Parameters: interrupt_INTx_t										   */
- /* Returns: en_extiErrorStatus				                                   */
- /* Description: This Function initialize a given external interrupt           */
- /******************************************************************************/
-  /* Options														           */
-  /*****************************************************************************/
-  /* mode     : FALLING_EDGE, RISING_EDGE, LOW_LEVEL, LOGICAL_CHANGE           */
-  /* source   : INT0, INT1, INT2        						               */
-  /*****************************************************************************/
+/*******************************************************************************/
+/* Function: EXTI_interruptInit    @written by: Mahmoud Sharf-Eldin            */
+/* I/P Parameters: st_exti pointer  										   */
+/* Returns: en_extiErrorStatus				                                   */
+/* Description: This Function initialize a given external interrupt            */
+/*******************************************************************************/
+/* Options														               */
+/*******************************************************************************/
+/* mode     : FALLING_EDGE, RISING_EDGE, LOW_LEVEL, LOGICAL_CHANGE             */
+/* source   : INT0, INT1, INT2        						                   */
+/*******************************************************************************/
   
 en_extiErrorStatus EXTI_interruptInit(const st_exti *st_a_intObj);
 
   /******************************************************************************/
   /* Function: EXTI_interruptDeInit    @written by: Mahmoud Sharf-Eldin         */
-  /* I/P Parameters: interrupt_INTx_t										    */
+  /* I/P Parameters: st_exti pointer										    */
   /* Returns: en_extiErrorStatus				                                */
   /* Description: This Function de-initialize a given external interrupt        */
   /******************************************************************************/
