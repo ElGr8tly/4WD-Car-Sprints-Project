@@ -27,13 +27,19 @@
 #include "../HAL/motor_driver/motor.h"
 
 /*********************** MACROS DEFINITIONS ***********************/
-
 // Time periods for various robot actions (in seconds)
 #define SHORTEST_SIDE_PERIOD	4 /* 2 seconds */
-#define LONGEST_SIDE_PERIOD	6 /* 3 seconds */
-#define ROTATE_PERIOD		2 /* 1 second */
-#define SEQUENCE_MAX_NUMBER	4 /* Array size */
-
+#define LONGEST_SIDE_PERIOD	    6 /* 3 seconds */
+#define ROTATE_PERIOD		    2 /* 1 second */
+#define SEQUENCE_MAX_NUMBER	    4 /* Array size */
+//Timer preload values for dutyCycle speed change 
+/*      FOR TIMER0           */
+#define SPEED_50             128
+#define SPEED_30             77
+#define MAX_PRELOAD          255
+//Timer preload values for 0.5 (system tick)
+/*      FOR TIMER1           */
+#define PRE_TICKS            3035
 /*********************** USER TYPES DEFINITION ***********************/
 
 // Custom error status enumeration for the application

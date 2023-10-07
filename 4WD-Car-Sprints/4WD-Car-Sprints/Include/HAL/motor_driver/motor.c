@@ -109,10 +109,10 @@ en_motorErrorStatus MOTOR_stopMotorDirection()
     en_motorErrorStatus   en_a_retFunction = MOTOR_OK;
 
 
-    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[1]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[0]), DIO_HIGH);
-    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[1]), DIO_HIGH);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[0]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_leftMotorDirectionControl[1]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[0]), DIO_LOW);
+    en_a_retFunction &= DIO_setPinStatus(&(st_g_rightMotorDirectionControl[1]), DIO_LOW);
 
     return en_a_retFunction;
 }

@@ -235,42 +235,42 @@ typedef enum en_timerError{
  * initializes TIMERS based on the selected config, returns void
  * INPUT: void
  * OUTPUT: void
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_init(void);
 /***
  * Starts a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to start
  * OUTPUT: void
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_start(u8 u8_a_timerNumber);
 /***
  * Stops a specific TIMER based on input, returns void
  * INPUT: (u8) Timer to stop
  * OUTPUT: void
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_stop(u8 u8_a_timerNumber);
 /***
  * Reads a specific TIMER's current value(counter register) based on input, returns void
  * INPUT: (u8) Timer to read, (u16*) pointer to store the value
  * OUTPUT: (u16) timer current value
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_read(u8 u8_a_timerNumber, u16* u16_a_tTimerValue);
 /***
  * Preloads a specific TIMER value(counter register) based on input, returns void
  * INPUT:(u16) preload value , (u8) Timer to preload
  * OUTPUT: void
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_preload(u16 u16_a_value, u8 u8_a_timerNumber);
 /***
  * Sets the callback function for the input timer interrupt, returns void
  * INPUT: (u8) timer interrupt name, (*ptr) call back function
  * OUTPUT: void
- * Returns: void
+ * Returns: en_timerError, (ex: TIMER_OK, TIMER_WRONG_INPUT, TIMER_NOK…)
  * **/
 en_timerError TIMER_setCallBack(u8 u8_a_timerInterruptNum, void (*v_a_ptr)(void));
 #endif /* TIMER_H_ */

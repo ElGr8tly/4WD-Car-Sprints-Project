@@ -15,7 +15,7 @@ u8 u8_g_sequenceNumber = 0; // Counter to keep track of the current sequence num
 
 u8 u8_g_halfSecondStop = 0; // Counter for half-second stop
 
-u8 u8_g_pwmDutyCycle = 128; // PWM duty cycle value
+u8 u8_g_pwmDutyCycle   = 128; // PWM duty cycle value
 
 u16 u16_g_timerLastValue = 0; // Last recorded timer value
 
@@ -45,7 +45,7 @@ st_carMode st_g_systemSequence[SEQUENCE_MAX_NUMBER] = {
 st_pinConfig st_g_pwmSignalPin = {PORTA_INDEX, DIO_PIN4, DIO_DIRECTION_OUTPUT, DIO_HIGH, DIO_UNLOCK};
 
 // Button configurations for the start and stop buttons
-st_button st_g_startButton = {PORTD_INDEX, DIO_PIN1};
+st_button st_g_startButton = {PORTD_INDEX, DIO_PIN3};
 st_button st_g_stopButton = {PORTD_INDEX, DIO_PIN2};
 
 // LED configurations for various status indicators
@@ -71,8 +71,9 @@ st_exti st_g_stopInterrupt = {
 
 void APP_overflowRoutine()
 {
+	//to make every overflow happen at 500ms interval
+	TIMER_preload(PRE_TICKS,TIMER_TM1);
 	static i8 i8_gs_overFlowCounter = 0;
-	TIMER_preload(3035,TIMER_TM1); 
 	if (en_g_carStatus == SYSTEM_ON)
 	{
 		i8_gs_overFlowCounter++;
@@ -110,7 +111,7 @@ void APP_pwmRoutine()
 	if(u8_a_flag == 0){
 		// If the signal is currently low, set it to high and update Timer0 preload value
 		DIO_setPinStatus(&st_g_pwmSignalPin, DIO_HIGH);
-		TIMER_preload(255 - u8_g_pwmDutyCycle,TIMER_TM0);
+		TIMER_preload( (MAX_PRELOAD - u8_g_pwmDutyCycle), TIMER_TM0);
 		u8_a_flag = 1;
 		} else if(u8_a_flag == 1){
 		// If the signal is currently high, set it to low and update Timer0 preload value
@@ -159,7 +160,6 @@ en_appErrorStatus APP_init()
 	en_a_appErrorStatus |= TIMER_init();
 	en_a_appErrorStatus |= TIMER_setCallBack(TIMER0_OVF, APP_pwmRoutine);
 	en_a_appErrorStatus |= TIMER_setCallBack(TIMER1_OVF, APP_overflowRoutine);
-	en_a_appErrorStatus |= TIMER_preload(231, TIMER_TM0);
 
 	// Enable global interrupts
 	en_a_appErrorStatus |= GIE_enableGeneralInterrupt();
@@ -190,6 +190,8 @@ void APP_systemStart()
     // Check if the system is currently OFF
     if (en_g_carStatus == SYSTEM_OFF)
     {
+		// Resume Timer1 with the last recorded value
+	    TIMER_preload(u16_g_timerLastValue, TIMER_TM1);
         // Start Timer0 and Timer1
         TIMER_start(TIMER_TM0);
         TIMER_start(TIMER_TM1);
@@ -197,8 +199,7 @@ void APP_systemStart()
         // Set the system status to START_PRESSED
         en_g_carStatus = START_PRESSED;
 
-        // Resume Timer1 with the last recorded value
-        TIMER_preload(TIMER_TM1, u16_g_timerLastValue);
+
     }
     // If the system is already ON, do nothing
 }
@@ -248,7 +249,7 @@ void APP_systemStop()
  */
 en_appErrorStatus APP_longestSide()
 {
-    u8_g_pwmDutyCycle = 128; // Set the PWM duty cycle to default
+    u8_g_pwmDutyCycle = SPEED_50; // Set the PWM duty cycle to 50%
     en_appErrorStatus en_a_appErrorStatus = APP_OK;
 
     // Turn off the currently active LED (if any)
@@ -279,7 +280,7 @@ en_appErrorStatus APP_longestSide()
  */
 en_appErrorStatus APP_shortestSide()
 {
-    u8_g_pwmDutyCycle = 77; // Set the PWM duty cycle for shorter movement
+    u8_g_pwmDutyCycle = SPEED_30; // Set the PWM duty cycle for shorter movement(30%)
     en_appErrorStatus en_a_appErrorStatus = APP_OK;
 
     // Turn off the currently active LED (if any)
